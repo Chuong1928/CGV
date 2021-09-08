@@ -152,9 +152,7 @@ input[type="search"] {
   box-sizing: content-box;
 }
 input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
+
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
@@ -693,10 +691,7 @@ a:focus {
 textarea {
   resize: none;
 }
-input,
-textarea {
-  -webkit-appearance: none;
-}
+
 .devider-wrapper {
   width: 100%;
   padding: 0 15px;

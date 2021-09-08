@@ -1,0 +1,21 @@
+<h1 class="mt-0">Quên mật khẩu ?</h1>
+    <div class="we-login-register"> 
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="f-email ">
+                  <label for="email" class="label-group">Email của bạn</label> 
+                  <p class="reset-magin">Liên kết khôi phục lại mật khẩu sẽ được gửi đến Email của bạn !</p>
+                  <%= f.text_field :email, autofocus: true, autocomplete: "email" , placeholder: 'Your email' %>
+                  <p class="reset-magin error-mes">.</p>
+                  
+            </div>
+
+          <div class="actions">
+                <button type="submit" class="btn-submit" data-ripple="">Submit</button>
+          </div>
+        <% end %>
+      <div class="mt-4 text-center">
+           <a href="<%= new_session_path(resource_name)	 %>" class="text-muted"><i class="fas fa-sign-in-alt mr-1"></i> Đăng nhập ngay !</a>
+      </div>
+    </div>
+
