@@ -1,0 +1,5 @@
+<p>Xin chào <%= @email %>!</p>
+
+<p>Vui lòng nhấn vào liên kết bên dưới để  Xác Thực tài khoản của bạn !</p>
+
+<p><%= link_to 'Xác Thực Tài Khoản !', confirmation_url(@resource, confirmation_token: @token) %></p>
