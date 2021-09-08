@@ -1,15 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <title>CGV</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+	<!-- Basic Page Needs -->
+        <meta charset="utf-8">
+        <title>CGV | Film </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+        <meta content="Themesbrand" name="author">
+    
+    <!-- Mobile Specific Metas-->
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="telephone=no" name="format-detection">
+    
+    <!-- Fonts -->
+        <!-- Font awesome - icon font -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/08341c31c3.js" crossorigin="anonymous"></script>
+        	<!-- Google font -->
+        <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+        
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag 'user', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<body>
 
-  <body>
-    <%= yield %>
-  </body>
-</html>
+    <div class="wrapper">
+         <%= render partial: "shared/header" %>
+        <!-- Main content -->
+         <section>
+        <div class="container_resgiter mt-5">
+                <div class="left-content">
+                    <h3>ĐĂNG KÝ TÀI KHOẢN THÀNH VIÊN CGV.
+                    </h3>
+                    <p>Để không bỏ lỡ bất kì bộ phim nào.</p>
+                    <div class="hero-img">
+                        <img src="https://d3c9ouasuy8pg6.cloudfront.net/dist/images/credential-light_a0fe0c5fd9697bd0322aa18f1769a946.png" alt="">
+                    </div>
+                </div>
+                <div class="right-content">
+                    
+                    <%= yield %>
+                
+                </div>
+            </div>
+        </section>
+	<!-- JavaScript-->
+
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+     <%= javascript_pack_tag 'validate', 'data-turbolinks-track': 'reload' %>
+</body>
+</html>  
