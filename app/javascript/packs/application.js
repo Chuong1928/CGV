@@ -8,8 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require('jquery')
-require('packs/libs/jquery.selectbox-0.2.min')
-require('packs/libs/custom')
+
 
 
 // require jquery3

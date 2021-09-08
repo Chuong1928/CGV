@@ -1,0 +1,64 @@
+ <div class="we-login-register">
+    <h1 class="mt-0">Đăng ký tài khoản</h1>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "register-form-1"}) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="f-accname">
+              <label for="accname" class="label-group">Họ Và Tên</label> 
+                <%= f.text_field :name, autofocus: true, autocomplete: "UserName" , placeholder: 'Họ và tên' %> 
+                <p class="reset-magin error-mes">.</p>
+        </div>
+        <div class="f-email ">
+              <label for="email" class="label-group">Địa chỉ email</label> 
+              <p class="reset-magin">Bạn sẽ dùng Email này để đăng nhập vào CGV</p>
+              <%= f.text_field :email, autofocus: true, autocomplete: "email" , placeholder: 'Email' %>
+              <p class="reset-magin error-mes">.</p>
+        </div> 
+        <div class="f-email ">
+              <div class="d-flex">
+                     <div>
+                          <label for="birthday" class="label-group">Ngày sinh</label> 
+                          <%= f.date_field :birthday, autofocus: true, autocomplete: "email" , as: :date, value: f.object.try(:strftime,"%m/%d/%Y") %>
+                      </div>
+                      <div>
+                           <label for="birthday" class="label-group">Giới tính</label> 
+                           <div>
+                                 <div>
+                                        <%= f.radio_button :gender, 'Nam', :checked => true %> 
+                                       <label class="px-2">Nam</label>
+                                 </div>
+                                 <div>
+                                      <%= f.radio_button :gender, 'Nữ' %>
+                                      <label class="px-2">Nữ</label>
+                                  </div>
+                           </div>
+                      </div>
+              </div>
+              
+        </div> 
+        <div class="f-pass">
+              <label for="password" class="label-group">Mật khẩu <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> kí tự tối thiểu.)</em>
+                <% end %><br /></label> 
+               
+              <%= f.password_field :password, autocomplete: "current-password", placeholder: 'Mật khẩu' %> 
+              <p class="reset-magin error-mes">.</p><br>    
+        </div>
+        <div class="f-cfpass">
+                  <label for="cfpassword" class="label-group">Xác nhận mật khẩu</label> 
+                  <%= f.password_field :password_confirmation, autocomplete: "current-password", placeholder: 'Xác nhận mật khẩu' %> 
+                  <p class="reset-magin error-mes">.</p>
+                  <br>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn-submit" data-ripple="">Đăng Ký</button>
+        </div>
+    <% end %>
+
+        <div class="text-center my-3"> 
+            <span class="text-center "> OR </span>
+        </div>
+        <div class="mt-2 mb-5 text-center">
+              <a href="<%= new_session_path(resource_name)	 %>" class="text-muted"><i class="fas fa-sign-in-alt mr-1"></i> Đăng nhập ngay !</a>
+        </div>
+</div>
