@@ -1,17 +1,29 @@
+
         <div class="search-wrapper">
             <div class="container container--add">
-                <form id='search-form' method='get' class="search">
-                    <input type="text" class="search__field" placeholder="Search">
-                    <select name="sorting_item" id="search-sort" class="search__sort" tabindex="0">
-                        <option value="1" selected='selected'>By title</option>
-                        <option value="2">By year</option>
-                        <option value="3">By producer</option>
-                        <option value="4">By title</option>
-                        <option value="5">By year</option>
-                    </select>
-                    <button type='submit' class="btn btn-md btn--danger search__button">search a movie</button>
-                </form>
+                <%= search_form_for @search, class: "search" do |f| %>
+                    <div class="form-group d-flex">
+                        <%= f.text_field :age_limit_gteq, class: "search__field w-50", placeholder: "Độ tuổi >="  %>
+                        <div>
+                            <%= f.text_field :key_cont, class: "search__field w-100", placeholder: "Search" %><br>
+                            <select name="Scope" id="search-sort" class="search__sort w-100" tabindex="0">
+                                <option value="1" selected='selected'>Tên Phim</option>
+                                <option value="2">Thể loại</option>
+                                <option value="3">Quốc gia</option>
+                                <option value="4">Đạo diễn</option>
+                                
+                            </select> 
+                        </div>  
+                        
+                     </div>  
+                   <button type='submit' class="btn btn-md btn--danger search__button">search a movie</button>
+                    <p class="text-center">Bạn có thể tìm kiếm theo độ tuổi hoặc từ khóa bạn muốn !</p>
+                <% end %>
             </div>
-        </div>  
+           
+        </div> 
+
+    
+
 
 

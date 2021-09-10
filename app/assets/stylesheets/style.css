@@ -2583,7 +2583,6 @@ input[type="button"].btn-block {
 .tags-area {
   border-top: 1px solid #dbdee1;
   border-bottom: 1px solid #dbdee1;
-  margin-top: 40px;
   padding-top: 13px;
   padding-bottom: 6px;
 }
@@ -2639,7 +2638,7 @@ input[type="button"].btn-block {
 }
 .search-wrapper {
   background-color: #dbdee1;
-  height: 86px;
+  height: 100px;
 }
 .list-input {
   margin-left: 48px;
@@ -8071,15 +8070,6 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   content: "\f075";
   font-size: 13px;
   left: 21px;
-}
-.category--popular:before {
-  background-image: url(../images/icons/heart.svg);
-}
-.category--discuss:before {
-  background-image: url(../images/icons/comment.svg);
-}
-.category--cooming:before {
-  background-image: url(../images/icons/film.svg);
 }
 .category--count {
   color: #ffffff;
