@@ -2583,7 +2583,6 @@ input[type="button"].btn-block {
 .tags-area {
   border-top: 1px solid #dbdee1;
   border-bottom: 1px solid #dbdee1;
-  margin-top: 40px;
   padding-top: 13px;
   padding-bottom: 6px;
 }
@@ -2621,6 +2620,7 @@ input[type="button"].btn-block {
   position: absolute;
   right: 15px;
   top: 10px;
+  width: 118px;
 }
 .content-wrapper {
   overflow: hidden;
@@ -2639,7 +2639,7 @@ input[type="button"].btn-block {
 }
 .search-wrapper {
   background-color: #dbdee1;
-  height: 86px;
+  height: 100px;
 }
 .list-input {
   margin-left: 48px;
@@ -8072,15 +8072,6 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   font-size: 13px;
   left: 21px;
 }
-.category--popular:before {
-  background-image: url(../images/icons/heart.svg);
-}
-.category--discuss:before {
-  background-image: url(../images/icons/comment.svg);
-}
-.category--cooming:before {
-  background-image: url(../images/icons/film.svg);
-}
 .category--count {
   color: #ffffff;
   font-size: 13px;
@@ -8773,7 +8764,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .control-panel {
-    margin-right: 75px;
+    left: 40%;
   }
   ul#navigation {
     margin-right: 0;
@@ -8988,7 +8979,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 @media (max-width: 767px) {
   .control-panel {
-    margin-right: 75px;
+    left: 40%;
   }
   ul#navigation {
     margin-right: 0;
@@ -9604,11 +9595,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   #navigation-box {
     min-height: 102px;
   }
-  .control-panel {
-    top: 55px;
-    right: 50%;
-    margin-right: -104px;
-  }
+
   #navigation-toggle,
   #navigation-toggle.open-menu {
     left: auto;
@@ -9623,20 +9610,19 @@ ul#navigation li.mega-menu__nav-item:hover:before {
     height: 135px;
   }
   .search .sbHolder {
-    top: 75px;
     border: none;
     right: auto;
-    left: 50%;
+    right: 5%;
     margin-left: -140px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
   }
   .search .search__button {
-    top: 74px;
-    right: auto;
-    left: 50%;
+    position: relative;
+    top: 0;
   }
+
   .search .search__field {
     padding-right: 19px;
   }
@@ -9850,6 +9836,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   }
 }
 @media (max-width: 360px) {
+  .control-panel {
+    left: 30%;
+  }
   .ui-datepicker {
     margin-left: -10px;
   }
