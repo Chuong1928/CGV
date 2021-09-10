@@ -1,6 +1,6 @@
 
  <header class="header-wrapper header-wrapper--home">
-    <div class="container">
+    <div class="container d-flex d-lg-block d-sm-block">
         <!-- Logo link-->
         <a href='<%= root_path %>' class="logo">
             <img alt='logo' src="https://www.cgv.vn/skin/frontend/cgv/default/images/cgvlogo.png">
@@ -57,10 +57,10 @@
                <% if user_signed_in? %>
                         <div class="dropdown d-inline-block">
                                 <button type="button" class="btn btn-md btn--warning btn--book btn-control--home login-window" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-xl-inline-block ml-1">
+                                <span class=" d-xl-inline-block ml-1">
                                     <%=  current_user.name %>
                                  </span>
-                                   <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                   <i class="mdi mdi-chevron-down  d-xl-inline-block"></i>
                                  </button>
                                  <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="<%= account_path(current_user.id) %>"><i

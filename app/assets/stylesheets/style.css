@@ -8763,7 +8763,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .control-panel {
-    margin-right: 75px;
+    left: 40%;
   }
   ul#navigation {
     margin-right: 0;
@@ -8978,7 +8978,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 @media (max-width: 767px) {
   .control-panel {
-    margin-right: 75px;
+    left: 40%;
   }
   ul#navigation {
     margin-right: 0;
@@ -9594,11 +9594,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   #navigation-box {
     min-height: 102px;
   }
-  .control-panel {
-    top: 55px;
-    right: 50%;
-    margin-right: -104px;
-  }
+
   #navigation-toggle,
   #navigation-toggle.open-menu {
     left: auto;
@@ -9613,20 +9609,19 @@ ul#navigation li.mega-menu__nav-item:hover:before {
     height: 135px;
   }
   .search .sbHolder {
-    top: 75px;
     border: none;
     right: auto;
-    left: 50%;
+    right: 5%;
     margin-left: -140px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
   }
   .search .search__button {
-    top: 74px;
-    right: auto;
-    left: 50%;
+    position: relative;
+    top: 0;
   }
+
   .search .search__field {
     padding-right: 19px;
   }
@@ -9840,6 +9835,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   }
 }
 @media (max-width: 360px) {
+  .control-panel {
+    left: 30%;
+  }
   .ui-datepicker {
     margin-left: -10px;
   }
