@@ -2620,6 +2620,7 @@ input[type="button"].btn-block {
   position: absolute;
   right: 15px;
   top: 10px;
+  width: 118px;
 }
 .content-wrapper {
   overflow: hidden;
