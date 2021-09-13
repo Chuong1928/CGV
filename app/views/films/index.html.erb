@@ -1,0 +1,147 @@
+
+<!-- Main content -->
+<section class="container">
+   <div class="col-sm-12">
+         <% if params[:q] %>
+                 <h2 class="pl-0 page-heading"><i class="fas fa-search"></i>
+                 Kết quả tìm kiếm cho từ khóa của bạn.
+                  </h2>
+        
+         <div class="row">
+            
+                <% @films.each do |film | %>
+                     <div class="col-sm-4 col-md-3">
+                            <div class="gallery-item">
+                                <a href='<%= film.trailer_link %>' class="trailer-sample gallery-item__image gallery-item--photo">
+                                    <img src="<%= film.image_url %>" style = "height:350px;width:400px">
+                                </a>
+                                <a href='<%= film_path(film) %>' class="gallery-item__descript gallery-item--photo-link">
+                                    <span class="gallery-item__icon"><i class="fa fa-camera"></i></span>
+                                    <p class="gallery-item__name">Xem Chi Tiết</p>
+                                </a>
+                                <a href='<%= film_ticket_order_index_path(film) %>' class="gallery-item__descript gallery-item--photo-link">
+                                    <span class="gallery-item__icon"><i class="fas fa-ticket-alt"></i></span>
+                                    <p class="gallery-item__name">Mua Vé</p>
+                                </a>
+                            </div>
+                      </div>
+                <% end %>
+        </div>
+        <% if  @films.any? %>
+            <h2 class="pl-0 page-heading"><i class="fas fa-video mr-3"></i><%=  @films.last.film_type.name %> Tương tự</h2>
+                <div class="row">
+                    <% Film.where(film_type_id: @films.last.film_type.id).each do |film | %>
+                            <div class="col-sm-4 col-md-3">
+                                <div class="gallery-item">
+                                    <a href='<%= film.trailer_link %>' class="trailer-sample gallery-item__image gallery-item--photo">
+                                        <img src="<%= film.image_url %>" style = "height:350px;width:400px">
+                                    </a>
+                                    <a href='<%= film_path(film) %>' class="gallery-item__descript gallery-item--photo-link">
+                                        <span class="gallery-item__icon"><i class="fa fa-camera"></i></span>
+                                        <p class="gallery-item__name">Xem Chi Tiết</p>
+                                    </a>
+                                    <a href='<%= film_ticket_order_index_path(film) %>' class="gallery-item__descript gallery-item--photo-link">
+                                        <span class="gallery-item__icon"><i class="fas fa-ticket-alt"></i></span>
+                                        <p class="gallery-item__name">Mua Vé</p>
+                                    </a>
+                                </div>
+                            </div>
+                    <% end %>
+                </div>
+            <% end %>
+
+           
+        <div class="pagination paginatioon--full">
+            <a href='#' class="pagination__prev">prev</a>
+            <a href='#' class="pagination__next">next</a>
+        </div>
+        <% else %>
+        <section class="container">
+             <h2 class="p-0 page-heading px-4"><i class="fas fa-video"></i> Phim HOT</h2>
+
+            <div class="col-sm-8 col-md-9 col-sm-push-4 col-md-push-3">
+                 <div class="tags-area">
+                    <div class="tags tags--unmarked">
+                        <span class="tags__label">Sorted by:</span>
+                            <ul>
+                                <li class="item-wrap"><a href="#" class="tags__item item-active" data-filter="all">all</a></li>
+                                
+                                <li class="item-wrap"><a href="#" class="tags__item" data-filter="phim_hai">Phim hài</a></li>
+                                <li class="item-wrap"><a href="#" class="tags__item" data-filter="phim_hanh_dong">Phim hành động</a></li>
+                                
+                            </ul>
+                    </div>
+                </div>
+                
+                <!-- Movie preview item -->
+                <% @films.each do |film | %>
+                    <div class="movie movie--preview <%= film.film_type_id == 1 ? "phim_hai" : "phim_hanh_dong" %>" style="display: block;">
+                        <div class="col-sm-5 col-md-3">
+                                <div class="movie__images">
+                                    <img alt="" src="<%= film.image_url %>" style="height:250px">
+                                </div>
+                            
+                        </div>
+
+                        <div class="col-sm-7 col-md-9">
+                                <a href="movie-page-right.html" class="movie__title link--huge"><%= film.name %></a>
+
+                                <p class="movie__time"><%= film.time %></p>
+
+                                <p class="movie__option"><strong>Quốc gia: </strong><%= film.country %></p>
+                                <p class="movie__option"><strong>Thể loại: </strong><%= film.film_type.name %></p>
+                                <p class="movie__option"><strong>Ngày công chiếu: </strong><%= film.release_date %></p>
+                                <p class="movie__option"><strong>Đạo diễn: </strong><%= film.director %></p>
+                                <p class="movie__option"><strong>Diễn viên: </strong><%= film.actors %></p>
+                                <p class="movie__option"><strong>Giới hạn độ tuổi: </strong>PHIM CẤM KHÁN GIẢ DƯỚI <%= film.age_limit %> TUỔI</p>
+
+                                <div class="movie__btns">
+                                    <a href="<%= film_ticket_order_index_path(film) %>" class="btn btn-md btn--warning">Đặt vé  <span class="hidden-sm">cho bộ phim này</span></a>
+                                    <a href="#" class="watchlist">Add to watchlist</a>
+                                </div>
+
+                        </div>
+                    </div>
+                <% end %>
+                <!-- end movie preview item -->
+                
+                <div class="coloum-wrapper">
+                    <div class="pagination paginatioon--full" style="display: block;">
+                            <a href="#" class="pagination__prev">prev</a>
+                            <a href="#" class="pagination__next">next</a>
+                    </div>
+                </div>
+
+            </div>
+                    
+            <aside class="col-sm-4 col-md-3 col-sm-pull-8 col-md-pull-9">
+                <div class="sitebar sitebar--left">
+                    <div class="banner-wrap first-banner--left">
+                        <img alt="banner" src="https://www.cgv.vn/media/wysiwyg/2021/U22_WEB_350x495.jpg">
+                    </div>
+
+                     <div class="banner-wrap">
+                        <img alt="banner" src="https://www.cgv.vn/media/wysiwyg/2021/032021/momo-godzilla-kong_350x495.jpg">
+                    </div>
+
+                     <div class="banner-wrap banner-wrap--last">
+                        <img alt="banner" src="https://www.cgv.vn/media/wysiwyg/2021/032021/CGV_1k_350x495.jpg">
+                    </div>
+                    <div class="category category--cooming category--count marginb-sm mobile-category rs-cat">
+                        <h3 class="category__title">Phim đang <br><span class="title-edition">CHIẾU</span></h3>
+                        <ol>
+                             <% @films.each do |film | %>
+                                 <li><a href="<%= film_path(film) %>" class="category__item"><%= film.name %></a></li>
+                             <% end %>
+                        </ol>
+                    </div>
+                    
+                   
+
+                </div>
+            </aside>
+
+        </section>
+        <% end %>
+    </div>
+</section>

@@ -12,14 +12,15 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="telephone=no" name="format-detection">
     
-    <!-- Fonts -->
+     
         <!-- Font awesome - icon font -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/08341c31c3.js" crossorigin="anonymous"></script>
         	<!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-        
+         <!-- Magnific-popup -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
@@ -30,15 +31,65 @@
         <!-- Main content -->
          <%= yield %>
 	<!-- JavaScript-->
-
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
         <%= javascript_pack_tag 'test', 'data-turbolinks-track': 'reload' %>
-        
-       <script>
+        <script>
                 <%== "var AUTH_TOKEN = #{form_authenticity_token.inspect};" %>
 
         </script>
+        <!-- Magnific-popup -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      
+        <script type="text/javascript">
+                 function init_Trailer () {
+                    "use strict";
+                                $('.trailer-sample').magnificPopup({
+                                    disableOn: 700,
+                                    type: 'iframe',
+                                    mainClass: 'mfp-fade',
+                                    removalDelay: 160,
+                                    preloader: false,
 
+                                    fixedContentPos: false
+                                });
+
+                                //show hide content
+                                $('.trailer-btn').click(function (e) {
+                                    e.preventDefault();
+
+                                    $(this).hide();
+                                    $(this).parent().addClass('trailer-block--short').find('.hidden-content').slideDown(500);
+                                })
+                                $('.tags__item').click(function (e) {
+                       
+                                    e.preventDefault();
+
+                                    //active sorted item
+                                    $('.tags__item').removeClass('item-active');
+                                    $(this).addClass('item-active');
+
+                                    var filter = $(this).attr('data-filter');
+
+                                    //show all the list items(this is needed to get the hidden ones shown)
+                                    $(".movie--preview").show();
+                                    $('.pagination').show();
+                                        
+                                    /*using the :not attribute and the filter class in it we are selecting
+                                        only the list items that don't have that class and hide them '*/
+                                    if ( filter.toLowerCase()!=='all'){
+                                        $('.movie--preview:not(.' + filter + ')').hide();
+                                        //Show pagination on filter = all;
+                                        $('.pagination').hide();
+                                    }
+                            });
+                }
+		</script>
+		<script type="text/javascript">
+            $(document).ready(function() {
+                init_Trailer();
+            });
+		</script>
 </body>
 </html>  
