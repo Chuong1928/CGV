@@ -1,1 +1,195 @@
-<%= @film.name %>
+<section class="container">
+            <div class="col-sm-8 col-md-9">
+                <div class="movie" data-phim="<%= @film.id %>">
+                    <h2 class="page-heading p-0 text-uppercase font-weight-bold "><i class="fas fa-film mr-3"></i><%= @film.name %></h2>
+                    
+                    <div class="movie__info">
+                        <div class="col-sm-6 col-md-4 movie-mobile">
+                            <div class="movie__images">
+                                <span class="movie__rating">5.0</span>
+                                <img alt='' src="<%= @film.image_url %>" style = "height:350px;width:400px">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-8">
+                                <p class="movie__time"><%= @film.time %></p>
+
+                                <p class="movie__option"><strong>Quốc gia: </strong><%= @film.country %></p>
+                                <p class="movie__option"><strong>Thể loại: </strong><%= @film.film_type.name %></p>
+                                <p class="movie__option"><strong>Ngày công chiếu: </strong><%= @film.release_date %></p>
+                                <p class="movie__option"><strong>Đạo diễn: </strong><%= @film.director %></p>
+                                <p class="movie__option"><strong>Diễn viên: </strong><%= @film.actors %></p>
+                                <p class="movie__option"><strong>Giới hạn độ tuổi: </strong>PHIM CẤM KHÁN GIẢ DƯỚI <%= @film.age_limit %> TUỔI</p>
+
+                            <a href="#" class="comment-link">Comments:  15</a>
+                            <div class="social social--hide" style="margin-top:30px;">
+                                <span class="social__name">Share:</span>
+                                <a href="#" class="social__variant social--first fa fa-facebook"></a>
+                                <a href="#" class="social__variant social--second fa fa-twitter"></a>
+                                <a href="#" class="social__variant social--third fa fa-vk"></a>
+                            </div>
+                            <div class="movie__btns">
+                                <a href="#" class="btn btn-md btn--warning">book a ticket for this movie</a>
+                                <a href="#" class="watchlist">Add to watchlist</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="clearfix"></div>
+                    
+                    <h2 class="page-heading p-0 text-uppercase font-weight-bold"><i class="fas fa-file-alt mr-2"></i>Review</h2>
+
+                    <p class="movie__describe"><%= @film.plot %> </p>
+
+
+                </div>
+
+                <h2 class="page-heading text-uppercase font-weight-bold p-0"><i class="fas fa-ticket-alt"></i> Suất chiếu</h2>
+                <div>
+                    <div class="datepicker">
+                     <%= form_with  do |f| %>
+                            <span class="datepicker__marker"><i class="fa fa-calendar"></i>Ngày chiếu </span>
+                            <div>
+                                <%= f.date_field :day_show_film,class: "form-control", autofocus: true , as: :date, value: f.object.try(:strftime,"%m/%d/%Y") %>
+                            </div>
+                    <% end %>
+                    </div>
+                    <div class="time-select" id = "screen_show">
+                         <%= render partial: "screen/list_screen" %>
+                    </div>
+                    
+                    <!-- hiden maps with multiple locator-->
+                   
+
+                    <h2 class="page-heading">comments (15)</h2>
+
+                    <div class="comment-wrapper">
+                        <form id="comment-form" class="comment-form" method='post'>
+                            <textarea class="comment-form__text" placeholder='Add you comment here'></textarea>
+                            <label class="comment-form__info">250 characters left</label>
+                            <button type='submit' class="btn btn-md btn--danger comment-form__btn">add comment</button>
+                        </form>
+
+                        <div class="comment-sets">
+
+                        <div class="comment">
+                            <div class="comment__images">
+                                <img alt='' src="http://placehold.it/50x50">
+                            </div>
+
+                            <a href='#' class="comment__author"><span class="social-used fa fa-facebook"></span>Roberta Inetti</a>
+                            <p class="comment__date">today | 03:04</p>
+                            <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
+                            <a href='#' class="comment__reply">Reply</a>
+                        </div>
+
+                        <div class="comment">
+                            <div class="comment__images">
+                                <img alt='' src="http://placehold.it/50x50">
+                            </div>
+
+                            <a href='#' class="comment__author"><span class="social-used fa fa-vk"></span>Olia Gozha</a>
+                            <p class="comment__date">22.10.2013 | 14:40</p>
+                            <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
+                            <a href='#' class="comment__reply">Reply</a>
+                        </div>
+
+                        <div class="comment comment--answer">
+                            <div class="comment__images">
+                                <img alt='' src="http://placehold.it/50x50">
+                            </div>
+
+                            <a href='#' class="comment__author"><span class="social-used fa fa-vk"></span>Dmitriy Pustovalov</a>
+                            <p class="comment__date">today | 10:19</p>
+                            <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
+                            <a href='#' class="comment__reply">Reply</a>
+                        </div>
+
+                        <div class="comment comment--last">
+                            <div class="comment__images">
+                                <img alt='' src="http://placehold.it/50x50">
+                            </div>
+
+                            <a href='#' class="comment__author"><span class="social-used fa fa-facebook"></span>Sia Andrews</a>
+                            <p class="comment__date"> 22.10.2013 | 12:31 </p>
+                            <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
+                            <a href='#' class="comment__reply">Reply</a>
+                        </div>
+
+                        <div id='hide-comments' class="hide-comments">
+                            <div class="comment">
+                                <div class="comment__images">
+                                    <img alt='' src="http://placehold.it/50x50">
+                                </div>
+
+                                <a href='#' class="comment__author"><span class="social-used fa fa-facebook"></span>Roberta Inetti</a>
+                                <p class="comment__date">today | 03:04</p>
+                                <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
+                                <a href='#' class="comment__reply">Reply</a>
+                            </div>
+
+                            <div class="comment">
+                                <div class="comment__images">
+                                    <img alt='' src="http://placehold.it/50x50">
+                                </div>
+
+                                <a href='#' class="comment__author"><span class="social-used fa fa-vk"></span>Olia Gozha</a>
+                                <p class="comment__date">22.10.2013 | 14:40</p>
+                                <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie rhoncus enim, vitae sagittis dolor tristique et.</p>
+                                <a href='#' class="comment__reply">Reply</a>
+                            </div>
+                        </div>
+
+                        <div class="comment-more">
+                            <a href="#" class="watchlist">Show more comments</a>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="col-sm-4 col-md-3">
+                <div class="sitebar">
+                    <div class="banner-wrap first-banner--left">
+                        <img alt="banner" src="https://www.cgv.vn/media/wysiwyg/2021/U22_WEB_350x495.jpg">
+                    </div>
+
+                     <div class="banner-wrap">
+                        <img alt="banner" src="https://www.cgv.vn/media/wysiwyg/2021/032021/momo-godzilla-kong_350x495.jpg">
+                    </div>
+
+                     <div class="banner-wrap banner-wrap--last">
+                        <img alt="banner" src="https://www.cgv.vn/media/wysiwyg/2021/032021/CGV_1k_350x495.jpg">
+                    </div>
+                    
+                    <div class="category category--cooming category--count marginb-sm mobile-category rs-cat">
+                        <h3 class="category__title">Phim đang <br><span class="title-edition">CHIẾU</span></h3>
+                        <ol>
+                             <% @films.each do |film | %>
+                                 <li><a href="<%= film_path(film) %>" class="category__item"><%= film.name %></a></li>
+                             <% end %>
+                        </ol>
+                    </div>
+                    <div class="category category--discuss category--count marginb-sm mobile-category ls-cat">
+                        <h3 class="category__title">Phim sắp <br><span class="title-edition">Chiếu</span></h3>
+                        <ol>
+                            <li><a href="#" class="category__item">Gravity</a></li>
+                            <li><a href="#" class="category__item">The Counselor</a></li>
+                            <li><a href="#" class="category__item">Bad Grandpa</a></li>
+                            <li><a href="#" class="category__item">Blue Is the Warmest Color</a></li>
+                            <li><a href="#" class="category__item">Rush</a></li>
+                            <li><a href="#" class="category__item">Captain Phillips</a></li>
+                            <li><a href="#" class="category__item">Escape Plan</a></li>
+                            <li><a href="#" class="category__item">Cloudy with a Chance of Meatballs 2</a></li>
+                            <li><a href="#" class="category__item">Prisoners</a></li>
+                            <li><a href="#" class="category__item">The Fifth Estate</a></li>
+                        </ol>
+                    </div>
+
+                   
+
+                </div>
+            </aside>
+
+        </section>
