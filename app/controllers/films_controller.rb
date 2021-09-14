@@ -9,10 +9,20 @@ class FilmsController < ApplicationController
         end
     end
     def show
+        @films = Film.all
         @film = Film.all.find(params[:id])
+        data_filter = params[:search]
+         if !data_filter.nil?
+             @screenings = @film.screenings.where(day_show_film: params[:search][:date])
+             p "di vao day"
+         else
+            @screenings = @film.screenings.where(day_show_film: Time.now.strftime("%d/%m/%Y"))
+         end
+        
         respond_to do |format|
             format.html # index.html.erb
-            
+            format.js
         end
+       
     end
 end
