@@ -23,7 +23,9 @@
                                 <a href='<%= film.trailer_link %>' class="trailer-sample gallery-item__image gallery-item--photo">
                                     <img src="<%= film.image_url %>" style = "height:350px;width:400px">
                                 </a>
-                                <div class="text-center"> <strong class="text-center w-100"><%= film.name %></strong></div>
+                                <div  style="height:40px"> <strong class="text-center w-100"><%= film.name %></strong></div>
+                                <p class="mb-0"><strong>Thời lượng: </strong><%= film.time %> Phút</p>
+                                <p><strong>Khởi chiếu: </strong><%= film.release_date.to_date.strftime("%d/%m/%Y") %> </p>
                                 <div>
                                     <a href='<%= film_path(film) %>' class="float-left gallery-item__descript gallery-item--photo-link">
                                         <span class="gallery-item__icon"><i class="fa fa-camera"></i></span>

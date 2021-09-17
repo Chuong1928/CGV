@@ -1,0 +1,216 @@
+<section class="container d-lg-flex align-items-center">
+    <div class="col-sm-7 col-md-8"> 
+        <div class="movie" data-phim="<%= @this_film.id %>">
+            <h2 class="page-heading p-0 text-uppercase font-weight-bold "><i class="fas fa-film mr-3"></i><%= @this_film.name %></h2>
+            
+            <div class="movie__info">
+                <div class="col-sm-6 col-md-6 movie-mobile">
+                    <div class="movie__images">
+                        <span class="movie__rating">5.0</span>
+                        <img alt='' src="<%= @this_film.image_url %>" style = "height:350px;width:400px">
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+                        <p class="movie__time"><%= @this_film.time %></p>
+
+                        <p class="movie__option"><strong>Quốc gia: </strong><%= @this_film.country %></p>
+                        <p class="movie__option"><strong>Thể loại: </strong><%= @this_film.film_type.name %></p>
+                        <p class="movie__option"><strong>Ngày công chiếu: </strong><%= @this_film.release_date %></p>
+                        <p class="movie__option"><strong>Đạo diễn: </strong><%= @this_film.director %></p>
+                        <p class="movie__option"><strong>Diễn viên: </strong><%= @this_film.actors %></p>
+                        <p class="movie__option"><strong>Giới hạn độ tuổi: </strong>PHIM CẤM KHÁN GIẢ DƯỚI <%= @this_film.age_limit %> TUỔI</p>
+
+                    <a href="#" class="comment-link">Comments:  15</a>
+                    <div class="social social--hide" style="margin-top:30px;">
+                        <span class="social__name">Share:</span>
+                        <a href="#" class="social__variant social--first fa fa-facebook"></a>
+                        <a href="#" class="social__variant social--second fa fa-twitter"></a>
+                        <a href="#" class="social__variant social--third fa fa-vk"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5 col-md-4">
+        <div class="order-container">
+            <div class="order">
+                <img class="order__images" alt='' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZTVSDZKmgMXm-oOut2qcmdsFUiCPEynWsZVSPjlfml78-kPkqw4lk_gMVNpKiEiCKG4Q&usqp=CAU">
+                <p class="order__title font-weight-bold">Mua vé <br><span class="order__descript font-italic">Và tận hưởng phim ngay!</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container pt-5">
+            <div class="choose-indector py-5 w-75 m-auto text-center">
+                <strong class="display-4">THÔNG TIN SUẤT CHIẾU </strong>
+                <div>
+                    <div><strong>Mã suất chiếu: <%= @screening.id %>  </strong></div>
+                    <div><strong>Thời gian chiếu phim: <%= @screening.start_film_at.strftime("%H:%M - %d/%m/%Y") %>  </strong></div>
+                    <strong>Tên Phim: <%= @this_film.name %>  </strong>
+                    <div><strong>Vị trí: <%= @screening.room.name %></strong></div>
+                    <div><strong>Số lượng ghế : <%= @screening.room.seats.count %>( VIP :<%= @screening.room.vip_seat %> | Thường : <%= @screening.room.normal_seat %>  )</strong></div>
+                    
+                </div>
+                
+            </div>
+             <div class="order-step-area my-5">
+                <div class="order-step first--step order-step--disable ">1. Chọn suất chiếu</div>
+                <div class="order-step second--step">2. Chọn ghế ngồi</div>
+            </div>
+</section>
+<section class="container">
+    <div class="col-sm-12">
+
+        <div class="choose-sits">
+                <div class="choose-sits__info choose-sits__info--first">
+                    <ul>
+                        <li class="sits-price marker--none"><strong>Price</strong></li>
+                        <li class="sits-price sits-price--cheap">$10</li>
+                        <li class="sits-price sits-price--middle">$20</li>
+                        <li class="sits-price sits-price--expensive">$30</li>
+                    </ul>
+                </div>
+
+                <div class="choose-sits__info">
+                    <ul>
+                        <li class="sits-state sits-state--not">Not available</li>
+                        <li class="sits-state sits-state--your">Your choice</li>
+                    </ul>
+                </div>
+                
+                <div class="col-sm-12 col-lg-10 col-lg-offset-1">
+                <div class="sits-area ">
+                    <div class="sits-anchor">screen</div>
+
+                    <div class="sits">
+                        <aside class="sits__line">
+                            <span class="sits__indecator">A</span>
+                            <span class="sits__indecator">B</span>
+                            <span class="sits__indecator">C</span>
+                            <span class="sits__indecator">D</span>
+                            <span class="sits__indecator additional-margin">E</span>
+                            <span class="sits__indecator">F</span>
+                        </aside>
+
+                   
+                            <div class="sits__row ">
+                                <% @screening.room.seats.where(seat_type_id: 2).each_with_index do |seat, index| %>
+                                    <% if index <= 9 %>
+                                         <span class="sits__place sits-price--cheap <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='A<%= index+1%>' data-price='<%= seat.seat_type.price%>'>A<%= index+1%></span>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                            <div class="sits__row">
+                                <% @screening.room.seats.where(seat_type_id: 2).each_with_index do |seat, index| %>
+                                    <% if index >= 10 && index <=19 %>
+                                         <span class="sits__place sits-price--cheap <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='B<%= index+1%>' data-price='<%= seat.seat_type.price%>'>B<%= index+1%></span>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                            <div class="sits__row">
+                                <% @screening.room.seats.where(seat_type_id: 2).each_with_index do |seat, index| %>
+                                    <% if index >= 20 && index <=29 %>
+                                         <span class="sits__place sits-price--cheap <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='C<%= index+1%>' data-price='<%= seat.seat_type.price%>'>C<%= index+1%></span>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                            <div class="sits__row">
+                                <% @screening.room.seats.where(seat_type_id: 2).each_with_index do |seat, index| %>
+                                    <% if index >= 30 && index <=39 %>
+                                         <span class="sits__place sits-price--cheap <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='D<%= index+1%>' data-price='<%= seat.seat_type.price%>'>D<%= index+1%></span>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                                
+                
+                           
+                            <div class="sits__row additional-margin">
+                                <% @screening.room.seats.where(seat_type_id: 1).each_with_index do |seat, index| %>
+                                    <% if index <= 9 %>
+                                         <span class="sits__place sits-price--middle <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='E<%= index+1%>' data-price='<%= seat.seat_type.price%>'>F<%= index+1%></span>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                            <div class="sits__row">
+                                <% @screening.room.seats.where(seat_type_id: 1).each_with_index do |seat, index| %>
+                                    <% if index >= 10 && index <=19 %>
+                                         <span class="sits__place sits-price--middle <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='E<%= index+1%>' data-price='<%= seat.seat_type.price%>'>F<%= index+1%></span>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        <footer class="sits__number">
+                            <span class="sits__indecator">1</span>
+                            <span class="sits__indecator">2</span>
+                            <span class="sits__indecator">3</span>
+                            <span class="sits__indecator">4</span>
+                            <span class="sits__indecator">5</span>
+                            <span class="sits__indecator">6</span>
+                            <span class="sits__indecator">7</span>
+                            <span class="sits__indecator">8</span>
+                            <span class="sits__indecator">9</span>
+                            <span class="sits__indecator">10</span>
+                        </footer>
+                        <aside class="sits__checked  w-100 h-auto position-relative my-3">
+                            <div style="color:#fff; font-size:2.5rem" > Ghế đã chọn  </div>
+                            <div class="checked-place d-flex align-items-center justify-content-center">
+                                
+                            </div>
+                            <div style="color:#fff">
+                                Tổng tiền: 
+                                <div class="web checked-result">
+                                     0(VND)
+                                </div>
+                            </div>
+                            
+                        </aside>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-12 visible-xs"> 
+                <div class="sits-area--mobile">
+                    
+            
+
+                    <aside class="sits__checked">
+                            <div class="checked-place">
+                                <span class="choosen-place"></span>
+                            </div>
+                            <div class="mobile checked-result">
+                                $0
+                            </div>
+                    </aside>
+
+
+                </div>
+            </div>   
+                
+            </div>
+           
+    </div>
+
+</section>
+ <div class="clearfix"></div>
+<form id='film-and-time' class="booking-form" method='get' action='book3-buy.html'>
+
+    <input type='text' name='choosen-number' class="choosen-number">
+    <input type='text' name='choosen-number--cheap' class="choosen-number--cheap">
+    <input type='text' name='choosen-number--middle' class="choosen-number--middle">
+    <input type='text' name='choosen-number--expansive' class="choosen-number--expansive">
+    <input type='text' name='choosen-cost' class="choosen-cost">
+    <input type='text' name='choosen-sits' class="choosen-sits">
+
+
+    <div class="booking-pagination booking-pagination--margin">
+            <a href="<%=  film_path(@this_film) %>" class="booking-pagination__prev">
+                <span class="arrow__text arrow--prev">Quay lại</span>
+                <span class="arrow__info">Chọn suất chiếu</span>
+            </a>
+            <a href="<%= payment_film_screen_path %>" class="booking-pagination__next next_step_payment">
+                <span class="arrow__text arrow--next">Bước tiếp theo</span>
+                <span class="arrow__info">Thanh toán</span>
+            </a>
+    </div>
+</form>
+
