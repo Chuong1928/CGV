@@ -29,7 +29,6 @@
                                 <a href="#" class="social__variant social--third fa fa-vk"></a>
                             </div>
                             <div class="movie__btns">
-                                <a href="#" class="btn btn-md btn--warning">book a ticket for this movie</a>
                                 <a href="#" class="watchlist">Add to watchlist</a>
                             </div>
                         </div>
@@ -46,20 +45,74 @@
 
                 <h2 class="page-heading text-uppercase font-weight-bold p-0"><i class="fas fa-ticket-alt"></i> Suất chiếu</h2>
                 <div>
-                    <div class="datepicker">
-                     <%= form_with  do |f| %>
-                            <span class="datepicker__marker"><i class="fa fa-calendar"></i>Ngày chiếu </span>
-                            <div>
-                                <%= f.date_field :day_show_film,class: "form-control", autofocus: true , as: :date, value: f.object.try(:strftime,"%m/%d/%Y") %>
-                            </div>
-                    <% end %>
-                    </div>
-                    <div class="time-select" id = "screen_show">
-                         <%= render partial: "screen/list_screen" %>
-                    </div>
+                   
                     
                     <!-- hiden maps with multiple locator-->
-                   
+                    <section class="container pt-5">
+                                <div class="order-step-area">
+                                    <div class="order-step first--step">1. Chọn suất chiếu</div>
+                                </div>
+
+                    </section>
+                        
+                    <section class="container">
+                        <div class="col-sm-12">
+
+                            <div class="col-sm-8 col-md-9">
+                                    <h2 class="page-heading p-0 text-uppercase font-weight-bold "><i class="fas fa-film mr-3"></i>Suất chiếu trong tuần</h2>
+                                        <div id="showtimes"><div class="showtimes">
+                                            <div class="btn-group btn-block showtime-dates mb-3" id="dates" style="position: relative;display: inline-flex;vertical-align: middle;">
+                                                    <% 7.times do |day| %>
+                                                            <a class="btn btn-light text-muted  day_show_film <%= ((Time.now.to_date+day).strftime("%d/%m") == (Time.now.to_date).strftime("%d/%m"))? "active" : "" %>" data-date="<%= (Time.now.to_date+day).strftime("%d/%m/%Y")%>">
+                                                                <%= (Time.now.to_date+day).strftime("%d/%m")%>
+                                                                <br><span class="small text-nowrap"><%= (Time.now.to_date+day).strftime("%a")%></span>
+                                                            </a>
+                                                    <% end %>
+                                            </div>
+                                            <div class="card card-sm">
+                                                <% if @screenings %>
+                                                    <div class="time-select card-body" id = "show_screen_of_film">
+                                                        <%= render partial: "screen/filter_screen" %>
+                                                        <div class="choose-indector choose-indector--time">
+                                                            <strong>Phim: <%= @film.name %> Thời gian : </strong><span class="choosen-area"> </span>
+                                                        </div>
+                                                    </div>
+                                                <% else %>
+                                                    <div class="card-body">
+                                                            Chưa có lịch chiếu cho ngày này. Hãy quay lại sau. Xin cám ơn.
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                        </div>
+
+                    </section>
+                    <div class="clearfix"></div>
+                    <form id='film-and-time' class="booking-form" method='get' action='book_a_seat'>
+                        <input type='text' name='choosen-movie' class="choosen-movie">
+
+                        <input type='text' name='choosen-city' class="choosen-city">
+                        <input type='text' name='choosen-date' class="choosen-date">
+                        
+                        <input type='text' name='choosen-cinema' class="choosen-cinema">
+                        <input type='text' name='choosen-time' class="choosen-time">
+
+
+                        <div class="booking-pagination">
+                                <a href="<%= film_path(@film)%>" class="booking-pagination__prev hide--arrow">
+                                    <span class="arrow__text arrow--prev"></span>
+                                    <span class="arrow__info"></span>
+                                </a>
+                                <a href="#" id="next_step_pick_seat" class="booking-pagination__next">
+                                    <span class="arrow__text arrow--next">Bước tiếp theo</span>
+                                    <span class="arrow__info">Chọn ghế ngồi</span>
+                                </a>
+                        </div>
+
+                    </form>
 
                     <h2 class="page-heading">comments (15)</h2>
 

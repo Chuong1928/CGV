@@ -1,0 +1,71 @@
+<section class="container">
+            <div class="col-sm-8 col-md-9">
+                <h2 class="page-heading p-0 text-uppercase font-weight-bold "><i class="fas fa-film mr-3"></i>Suất chiếu trong tuần</h2>
+                    <div id="showtimes"><div class="showtimes">
+                        <div class="btn-group btn-block showtime-dates mb-3" id="dates" style="position: relative;display: inline-flex;vertical-align: middle;">
+                                <% 7.times do |day| %>
+                                         <a class="btn btn-light text-muted date <%= ((Time.now.to_date+day).strftime("%d/%m") == (Time.now.to_date).strftime("%d/%m"))? "active" : "" %>" data-date="<%= (Time.now.to_date+day).strftime("%d/%m/%Y")%>">
+                                            <%= (Time.now.to_date+day).strftime("%d/%m")%>
+                                            <br><span class="small text-nowrap"><%= (Time.now.to_date+day).strftime("%a")%></span>
+                                         </a>
+                                <% end %>
+                         </div>
+                        <div class="card card-sm">
+                            <% if @screenings %>
+                                <div class="time-select card-body" id = "filter_screen">
+                                    <%= render partial: "screen/filter_screen" %>
+                                </div>
+                            <% else %>
+                                <div class="card-body">
+                                        Chưa có lịch chiếu cho ngày này. Hãy quay lại sau. Xin cám ơn.
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+               
+            <aside class="col-sm-4 col-md-3">
+                <div class="sitebar">
+                    <div class="banner-wrap first-banner--left">
+                        <img alt="banner" src="https://www.cgv.vn/media/wysiwyg/2021/U22_WEB_350x495.jpg">
+                    </div>
+
+                     <div class="banner-wrap">
+                        <img alt="banner" src="https://www.cgv.vn/media/wysiwyg/2021/032021/momo-godzilla-kong_350x495.jpg">
+                    </div>
+
+                     <div class="banner-wrap banner-wrap--last">
+                        <img alt="banner" src="https://www.cgv.vn/media/wysiwyg/2021/032021/CGV_1k_350x495.jpg">
+                    </div>
+                    
+                    <div class="category category--cooming category--count marginb-sm mobile-category rs-cat">
+                        <h3 class="category__title">Phim đang <br><span class="title-edition">CHIẾU</span></h3>
+                        <ol>
+                             <% @films.each do |film | %>
+                                 <li><a href="<%= film_path(film) %>" class="category__item"><%= film.name %></a></li>
+                             <% end %>
+                        </ol>
+                    </div>
+                    <div class="category category--discuss category--count marginb-sm mobile-category ls-cat">
+                        <h3 class="category__title">Phim sắp <br><span class="title-edition">Chiếu</span></h3>
+                        <ol>
+                            <li><a href="#" class="category__item">Gravity</a></li>
+                            <li><a href="#" class="category__item">The Counselor</a></li>
+                            <li><a href="#" class="category__item">Bad Grandpa</a></li>
+                            <li><a href="#" class="category__item">Blue Is the Warmest Color</a></li>
+                            <li><a href="#" class="category__item">Rush</a></li>
+                            <li><a href="#" class="category__item">Captain Phillips</a></li>
+                            <li><a href="#" class="category__item">Escape Plan</a></li>
+                            <li><a href="#" class="category__item">Cloudy with a Chance of Meatballs 2</a></li>
+                            <li><a href="#" class="category__item">Prisoners</a></li>
+                            <li><a href="#" class="category__item">The Fifth Estate</a></li>
+                        </ol>
+                    </div>
+
+                   
+
+                </div>
+            </aside>
+
+        </section>
