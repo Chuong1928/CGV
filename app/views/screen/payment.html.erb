@@ -1,0 +1,156 @@
+<section class="container d-lg-flex align-items-center">
+    <div class="col-sm-7 col-md-8"> 
+        <div class="movie" data-phim="<%= @this_film.id %>">
+            <h2 class="page-heading p-0 text-uppercase font-weight-bold "><i class="fas fa-film mr-3"></i><%= @this_film.name %></h2>
+            
+            <div class="movie__info">
+                <div class="col-sm-6 col-md-6 movie-mobile">
+                    <div class="movie__images">
+                        <span class="movie__rating">5.0</span>
+                        <img alt='' src="<%= @this_film.image_url %>" style = "height:350px;width:400px">
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+                        <p class="movie__time"><%= @this_film.time %></p>
+
+                        <p class="movie__option"><strong>Quốc gia: </strong><%= @this_film.country %></p>
+                        <p class="movie__option"><strong>Thể loại: </strong><%= @this_film.film_type.name %></p>
+                        <p class="movie__option"><strong>Ngày công chiếu: </strong><%= @this_film.release_date %></p>
+                        <p class="movie__option"><strong>Đạo diễn: </strong><%= @this_film.director %></p>
+                        <p class="movie__option"><strong>Diễn viên: </strong><%= @this_film.actors %></p>
+                        <p class="movie__option"><strong>Giới hạn độ tuổi: </strong>PHIM CẤM KHÁN GIẢ DƯỚI <%= @this_film.age_limit %> TUỔI</p>
+
+                    <a href="#" class="comment-link">Comments:  15</a>
+                    <div class="social social--hide" style="margin-top:30px;">
+                        <span class="social__name">Share:</span>
+                        <a href="#" class="social__variant social--first fa fa-facebook"></a>
+                        <a href="#" class="social__variant social--second fa fa-twitter"></a>
+                        <a href="#" class="social__variant social--third fa fa-vk"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5 col-md-4">
+        <div class="order-container">
+            <div class="order">
+                <img class="order__images" alt='' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZTVSDZKmgMXm-oOut2qcmdsFUiCPEynWsZVSPjlfml78-kPkqw4lk_gMVNpKiEiCKG4Q&usqp=CAU">
+                <p class="order__title font-weight-bold">Mua vé <br><span class="order__descript font-italic">Và tận hưởng phim ngay!</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container">
+        <div class="order-step-area my-5">
+            <div class="order-step first--step order-step--disable ">1. Chọn suất chiếu</div>
+            <div class="order-step second--step order-step--disable">2. Chọn ghế ngồi</div>
+            <div class="order-step second--step">3. Thanh toán</div>
+            
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-8 col-md-12">
+                <div class="food ">
+                    
+                    <div class="card ">
+                        <h2 class="page-heading p-0 font-weight-bold mt-3 text-center"><i class="fas fa-hamburger"></i> Mua thêm đồ ăn</h2>
+                        <div class="row m-0">
+                                <% @foods.each do |food| %>
+                                    <div class="col-sm-4">
+                                        <div class="card">
+                                            <div class="food-img">
+                                                <img src="<%= food.url_img %>" class="card-img-top" alt="...">
+                                                <div class="price-tag">
+                                                    <span class="amount"><%= (food.price/1000) %>K</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card-body d-flex align-items-center justify-content-between hahaha">
+                                                <p class="card-title m-0"><%= food.name %></p>
+                                                <a href="#" class="btn btn-primary add-food_to_order">Add</a>
+                                                <div class="d-none set_quantity_food w-50">
+                                                    <input type="text" value="1" name="demo3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-12">
+                <div class="order_summary">
+                    <div class="col-sm-12 card">
+                        <div class="checkout-wrapper">
+                            <h2 class="page-heading p-0 font-weight-bold mt-3"><i class="fas fa-cart-plus mx-2"></i> Thông tin hóa đơn</h2>
+                            <ul class="book-result d-flex justify-content-between">
+                                <div class="w-75">
+                                    <li class="book-result__item p-0">Vé: <span class="book-result__count booking-ticket"></span></li>
+                                    <div class="ticket-detail w-75 m-auto pb-4"> 
+                                        <li class="book-result__item d-block p-0"><span class=" text-muted"><%= @this_film.name %></span></li>                              
+                                        <li class="book-result__item d-block p-0"><span class=" text-muted"><%= @screening.room.name%></span></li>
+                                        <li class="book-result__item d-block p-0"> <span class="text-muted "><%= @screening.start_film_at.strftime("%H:%M - %d/%m/%Y") %></span></li>
+                                    </div>
+                                </div>
+                                
+                                
+                                <li class="book-result__item p-0">Thành tiền: <span class="book-result__count booking-cost p-0 d-block display-5">$60</span></li>
+                            </ul>
+
+                            
+                            <ul class="book-result d-flex justify-content-between" style="border-top: 1px dotted #ccc;">
+                                <div class="w-75">
+                                    <li class="book-result__item p-0">Đồ ăn</li>
+                                    <div class="ticket-detail w-75 m-auto pb-4"> 
+                                        <li class="book-result__item d-block p-0"><span class=" text-muted"><%= @this_film.name %></span></li>                              
+                                        <li class="book-result__item d-block p-0"><span class=" text-muted"><%= @screening.room.name%></span></li>
+                                        <li class="book-result__item d-block p-0"> <span class="text-muted "><%= @screening.start_film_at.strftime("%H:%M - %d/%m/%Y") %></span></li>
+                                    </div>
+                                </div>
+                                <li class="book-result__item p-0"> <span class="book-result__count booking-cost p-0 d-block display-5">$60</span></li>
+                            </ul>
+
+                            <ul class="book-result d-flex justify-content-between" style="border-top: 1px dotted #ccc;">
+                                <li class="book-result__item p-0 book-result__count display-4">Số tiền phải trả: </li>
+                                <span class="book-result__count booking-cost p-0 d-block display-5">$60</span>
+                            </ul>
+
+                           
+                          
+                            <h2 class="page-heading font-weight-bold p-0"> <i class="fas fa-money-check-alt mx-3"></i>Chọn phương thức thanh toán</h2>
+                            <div class="payment">
+                                <a href="#" class="payment__item">
+                                    <img alt='' src="https://i1.wp.com/www.utshob.com/wp-content/uploads/2019/06/cards.jpg?ssl=1" width="300px">
+                                </a>
+                            </div>        
+                        </div>
+                        
+                        <div class="order">
+                            <a href="book-final.html" class="btn btn-md btn--warning btn--wide">purchase</a>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+</section>
+
+
+<div class="clearfix"></div>
+
+<div class="booking-pagination">
+        <a href="book2.html" class="booking-pagination__prev">
+            <p class="arrow__text arrow--prev">prev step</p>
+            <span class="arrow__info">choose a sit</span>
+        </a>
+        <a href="#" class="booking-pagination__next hide--arrow">
+            <p class="arrow__text arrow--next">next step</p>
+            <span class="arrow__info"></span>
+        </a>
+</div>
+
+        
