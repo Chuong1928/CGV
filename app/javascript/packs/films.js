@@ -176,23 +176,94 @@ $("a.next_step_payment").on('click',function(e){
    sessionStorage.setItem('total_payment',$('.web.checked-result').text())
    sessionStorage.setItem('list_seat_name', list_seat_name);
 })
-$(".book-result__count.booking-ticket").text(sessionStorage.getItem('list_seat_name')+" ("+(sessionStorage.getItem('list_seat_name').split(",").length)+" Vé"+")")
+let tick_ket_count = 0;
+if(sessionStorage.getItem('list_seat_name')!= null ){
+    tick_ket_count = sessionStorage.getItem('list_seat_name').split(",").length
+}
+$(".book-result__count.booking-ticket").text(sessionStorage.getItem('list_seat_name')+" ("+(tick_ket_count)+" Vé"+")")
 $(".book-result__count.booking-cost").text((sessionStorage.total_payment))
 
 
 $(".add-food_to_order").on('click',function(e){
     e.preventDefault()
+    let food_id = $(this).prev().attr("data-food-id")
+    let price   = $(this).prev().attr("data-food-price")
+    $('.food-detail').append('<span class="text-muted d-block" data-food-price-pick = "'+price+'" data-food-pick = "'+food_id+'">'+$(this).prev().text()+' x<span class="food-quantity">1</span></span>');
+    $(".food-order").removeClass("d-none").addClass("d-flex")
+    $(this).closest(".hahaha").find("input.form-control").val(1)
+    let current_food_payment = parseInt($(".food-order").find(".pay-food").text())
+    let ticket_payment = $(".book-result__item .booking-cost").text().split(" ")[0];
+    
+    if(current_food_payment){
+        let total = current_food_payment+parseInt(price)
+        $(".food-order").find(".pay-food").text(total+" (VND)")
+        $(".total-payment .total-payment-cost").text(total+parseInt(ticket_payment)+" (VND)")
+        
+    }else{
+        $(".food-order").find(".pay-food").text(price+" (VND)")
+        $(".total-payment .total-payment-cost").text(parseInt(price)+parseInt(ticket_payment)+" (VND)")
+    }
+    
     $(this).addClass("d-none")
     $(this).next().removeClass("d-none")
     
 
 })
-$(".bootstrap-touchspin").addClass("w-50")
+
 $(document).on('click', '.bootstrap-touchspin-down',function(){
-    console.log($(this).closest(".input-group-prepend").next().val())
+   
+    let food_picked_id = $(this).closest(".hahaha").find("p.card-title").attr("data-food-id")
     let quantity = $(this).closest(".input-group-prepend").next().val();
+    let current_food = ($("[data-food-pick="+food_picked_id+"]").find(".food-quantity"))
+    let current_food_payment = parseInt($(".food-order").find(".pay-food").text())
+    current_food.text(quantity)
     if(quantity == 0){
-        $(".add-food_to_order").removeClass("d-none")
-        $(".set_quantity_food").addClass("d-none")
+        $(this).closest(".set_quantity_food").prev().removeClass("d-none")
+        $(this).closest(".set_quantity_food").addClass("d-none")
+        //current_food.closest(".text-muted").remove()
+        //current_food_payment = 0
     }
+
+    //
+    let price_of_food = ($("[data-food-pick="+food_picked_id+"]").attr("data-food-price-pick"))
+    let total = 0
+    if(current_food_payment){
+        
+         total = current_food_payment-parseInt(price_of_food)
+        $(".food-order").find(".pay-food").text(total+" (VND)")
+        
+        if(total == 0 || quantity == 0){
+            current_food.closest(".text-muted").remove()
+        }
+        
+    }
+    let ticket_payment = $(".book-result__item .booking-cost").text().split(" ")[0];
+    
+    $(".total-payment .total-payment-cost").text(total+parseInt(ticket_payment)+ " (VND)")
+
+})
+
+let curent_total_price = 0;
+$(document).on('click', '.bootstrap-touchspin-up',function(){
+    let food_quantity_pick = $(this).closest(".input-group-append").prev().val()
+    curent_total_price = parseInt($(".food-order").find(".pay-food").text())
+    // console.log($(this).closest(".hahaha").find("p.card-title").attr("data-food-id"))
+    let food_picked_id = $(this).closest(".hahaha").find("p.card-title").attr("data-food-id")
+    //console.log(food_picked_id)
+    let current_food = ($("[data-food-pick="+food_picked_id+"]").find(".food-quantity"))
+  
+    current_food.text(food_quantity_pick)
+
+    let price_of_food = ($("[data-food-pick="+food_picked_id+"]").attr("data-food-price-pick"))
+    
+    let total = 0;
+    let current_food_payment = parseInt($(".food-order").find(".pay-food").text())
+    if(current_food_payment){
+         total = current_food_payment+parseInt(price_of_food)
+        $(".food-order").find(".pay-food").text(total+" (VND)")
+    }
+    let ticket_payment = $(".book-result__item .booking-cost").text().split(" ")[0];
+    
+    $(".total-payment .total-payment-cost").text(total+parseInt(ticket_payment)+" (VND)")
+   
 })
