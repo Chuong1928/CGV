@@ -311,7 +311,7 @@ $(".btn-payment").on("click", function(e){
                             count -= 1;
                         }else if(count <= 0){
                                 clearInterval(countable);
-                                window.location="/"
+                                //window.location="/"
                         }
 
                 }, 1000);

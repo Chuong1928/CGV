@@ -14,20 +14,30 @@ class OrderController < ApplicationController
         @order.total_payment = params[:order][:total_payment]
         @order.status = true
         @seatorder_ids = Screening.find(params[:order][:screening_id]).seat_orders.pluck(:seat_id)
-        if @order.save 
-            @list_seat_id = params[:order][:seat_id]
-            @list_seat_id.split(",").each do |seat_id| 
-                @seat_order = SeatOrder.new
-                @seat_order.screening_id = params[:order][:screening_id]
-                @seat_order.seat_id = seat_id
-                @seat_order.order_id = @order.id
-                if @seat_order.save && !(@seatorder_ids.include?(seat_id.to_i))
-                    @success = true
-                    @message = "Success! Đặt vé thành công."
-                else
-                    @success = false
-                    @message = "Fail! Đặt vé thất bại."
-                end
+        
+        @list_seat_id = params[:order][:seat_id]
+        @list_seat_id.split(",").each do |seat_id|
+              if !(@seatorder_ids.include?(seat_id.to_i))
+                if @order.save 
+                    @seat_order = SeatOrder.new
+                    @seat_order.screening_id = params[:order][:screening_id]
+                    @seat_order.seat_id = seat_id
+                    @seat_order.order_id = @order.id
+                      if @seat_order.save 
+                          @success = true
+                          @message = "Success! Đặt vé thành công."
+                      else
+                          @success = false
+                          @message = "Fail! Đặt vé thất bại! lưu seatoder không thành công."
+                       end
+                 else
+                   @success = false
+                   @message = "Fail! Đặt vé thất bại!- lỗi khi lưu order."
+                 end
+              else
+                @success = false
+                @message = "Fail! Đặt vé thất bại!- lỗi khi lưu order - trùng seat_id."
+              end
             end
             respond_to do |format|
                 format.html { 
@@ -41,9 +51,20 @@ class OrderController < ApplicationController
                 }
                 format.json { render :json => { :success => @success, :message => @message }.to_json }
               end 
-            
-        end
+    end
 
+    def sent_you_ticket
+      @ticket_id = params[:mail][:ticket_id]
+      
+      if SentTicketMailer.sent_you_ticket(current_user, @ticket_id ).deliver_now
+        respond_to do |format|
+          format.json { render :json => { :message => "Gửi mail thành công" }.to_json }
+        end
+      else
+        respond_to do |format|
+          format.json { render :json => { :message => "Gửi mail thất bại" }.to_json }
+        end
+      end
     end
 
     def sent_you_ticket
