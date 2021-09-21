@@ -9,8 +9,6 @@ require("@rails/activestorage").start()
 require("channels")
 require('jquery')
 
-
-
 // require jquery3
 // require jquery_ujs
 // require "libs/jquery.selectbox-0.2.min"
@@ -23,3 +21,4 @@ require('jquery')
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+

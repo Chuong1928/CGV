@@ -1,6 +1,6 @@
 class Room < ApplicationRecord
-    has_many   :screenings
-    has_many   :seats
+    has_many   :screenings,dependent: :destroy
+    has_many   :seats,dependent: :destroy
 
     after_save :create_vip_seat, :create_normal_seat
 
