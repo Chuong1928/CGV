@@ -7,7 +7,6 @@ class HomeController < ApplicationController
     @films = @search.result
     respond_to do |format|
       format.html # index.html.erb
-      
-  end
+    end
   end
 end

@@ -269,9 +269,11 @@ $(document).on('click', '.bootstrap-touchspin-up',function(){
 })
 
 $(".btn-payment").on("click", function(e){
+    $(this).attr("disabled", true);
     e.preventDefault()
     console.log("thanh toán");
     let seat_id = sessionStorage.getItem('list_seat_id')
+    let seat_name = sessionStorage.getItem('list_seat_name')
     let total_payment = $(".total-payment").find(".total-payment-cost").text().split(" ")[0];
     let screening_id = $(".screening-info").attr("data-screening-id")
     $.ajax({
@@ -279,6 +281,7 @@ $(".btn-payment").on("click", function(e){
         data: {
             order: {
                 seat_id: seat_id,
+                seat_name: seat_name,
                 total_payment: total_payment,
                 screening_id : screening_id
             },
@@ -299,7 +302,7 @@ $(".btn-payment").on("click", function(e){
             $(function(){
                 let spanCount = $("span.back_home_page");
                 console.log(spanCount);
-                let count = 9;
+                let count = 5;
                     countable= setInterval(function (){
 
                         spanCount.text(count)
@@ -315,6 +318,29 @@ $(".btn-payment").on("click", function(e){
             })
         }).fail(function () {
             console.log("Lỗi")
+        })
+
+})
+
+$(".sent_ticket_to_mail").on("click",function(e){
+    e.preventDefault()
+    let ticket_id = $(".ticket__item").attr("data-order-id")
+
+    console.log(ticket_id);
+    $.ajax({
+        url: `/order/sent_you_ticket`,
+        data: {
+            mail: {
+                ticket_id: ticket_id
+            },
+            authenticity_token: AUTH_TOKEN
+        },
+        type: 'POST',
+        dataType: 'json',
+        }).done(function (data) {
+            console.log(data)
+        }).fail(function () {
+            console.log(data)
         })
 
 })

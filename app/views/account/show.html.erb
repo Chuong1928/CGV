@@ -1,0 +1,140 @@
+
+    <div class="col-md-12">  
+        <div class="col-md-3">      
+            <div class="portlet light profile-sidebar-portlet bordered">
+                <div class="profile-userpic">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-responsive" alt=""> </div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name"> <%= @user.name %> </div>
+                    <div > <%= @user.email %> </div>
+                </div>
+            
+                <div class="profile-usermenu">
+                    <nav>
+                        <div class="nav d-block nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active m-0" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Thông tin chung</a>
+                            <a class="nav-item nav-link m-0" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Chi tiết tài khoản</a>
+                            <a class="nav-item nav-link m-0" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Lịch sử giao dịch</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9"> 
+            <div class="portlet light bordered">
+                <div class="portlet-title tabbable-line">
+                    <div class="caption caption-md">
+                        <i class="icon-globe theme-font hide"></i>
+                        <span class="caption-subject font-blue-madison bold uppercase">CGV Account</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div>
+                        <!-- Tab panes -->
+                        <div class="tab-content" id="nav-tabContent">
+                            <div role="tabpanel" class="tab-pane active" id="nav-home">
+                                 <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Họ và Tên</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p> <%= @user.name %> </p>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p> <%= @user.email %> </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Ngày sinh</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p> <%= @user.birthday %> </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Giới tính</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p> <%= @user.gender %> </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Điện thoại</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p> <%= @user.phone %> </p>
+                                            </div>
+                                        </div>
+                            </div>
+                            
+                            <div role="tabpanel" class="tab-pane" id="nav-profile" aria-labelledby="nav-profile-tab">
+                                <form>
+                                <div class="form-group">
+                                    <label for="inputName">Name</label>
+                                    <input type="text" class="form-control" id="inputName" placeholder="Name">
+                                </div>
+                                    <div class="form-group">
+                                    <label for="inputLastName">Last Name</label>
+                                    <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                </div>
+                    
+                                <button type="submit" class="btn btn-default">Submit</button>
+                                </form>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="nav-contact" aria-labelledby="nav-contact-tab">
+                                 <table class="table">
+                                        <thead >
+                                            <tr>
+                                                <th scope="col" style="width: 136px;">Tên phim</th>
+                                                <th scope="col">Ngày chiếu</th>
+                                                
+                                                <th scope="col">Đồ ăn thêm</th>
+                                                <th scope="col">Tổng thanh toán</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% @user.orders.each do |order| %>
+                                                <tr>
+                                                    <td scope="row"><%= order.seat_orders.last.screening.film.name %></td>
+                                                    <td><%= order.seat_orders.last.screening.start_film_at.strftime("%d/%m/%Y") %></td>
+                                                
+                                                    <td><%= order.foodorders.count %></td>
+                                                    <td><%= order.total_payment %></td>
+                                                    <td><%= (check_film_sent(order.seat_orders.last.screening.start_film_at) == true) ? "Đã xem" : "Chưa xem"%></td>
+                                                    <td>
+                                                        <% if !check_film_sent(order.seat_orders.last.screening.start_film_at) %>
+                                                            <a type="button" class="btn btn-warning">Hủy đặt vé</a> 
+                                                            <a type="button" href="<%= order_path(order) %>" class="btn btn-success">Xem vé</a> 
+                                            
+                                                        <% end %>
+                                                    </td>
+                                                </tr>
+                                            <% end %>
+                                        </tbody>
+                                 </table>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

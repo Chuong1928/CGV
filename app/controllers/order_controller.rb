@@ -1,6 +1,11 @@
 class OrderController < ApplicationController
+  layout "app"
     def show
-
+        @order = Order.find(params[:id])
+        @list_seat_of_order = []
+        @order.seat_orders.each do |seat_order|
+          @list_seat_of_order << seat_order.seat.id
+        end
     end
 
     def create
@@ -8,6 +13,7 @@ class OrderController < ApplicationController
         @order.user_id = current_user.id
         @order.total_payment = params[:order][:total_payment]
         @order.status = true
+        @seatorder_ids = Screening.find(params[:order][:screening_id]).seat_orders.pluck(:seat_id)
         if @order.save 
             @list_seat_id = params[:order][:seat_id]
             @list_seat_id.split(",").each do |seat_id| 
@@ -15,7 +21,7 @@ class OrderController < ApplicationController
                 @seat_order.screening_id = params[:order][:screening_id]
                 @seat_order.seat_id = seat_id
                 @seat_order.order_id = @order.id
-                if @seat_order.save
+                if @seat_order.save && !(@seatorder_ids.include?(seat_id.to_i))
                     @success = true
                     @message = "Success! Đặt vé thành công."
                 else
@@ -38,6 +44,20 @@ class OrderController < ApplicationController
             
         end
 
+    end
+
+    def sent_you_ticket
+      @ticket_id = params[:mail][:ticket_id]
+      
+      if SentTicketMailer.sent_you_ticket(current_user, @ticket_id ).deliver_now
+        respond_to do |format|
+          format.json { render :json => { :message => "Gửi mail thành công" }.to_json }
+        end
+      else
+        respond_to do |format|
+          format.json { render :json => { :message => "Gửi mail thất bại" }.to_json }
+        end
+      end
     end
     
    
