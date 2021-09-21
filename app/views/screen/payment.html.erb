@@ -90,7 +90,7 @@
                                     <div class="ticket-detail w-75 m-auto pb-4"> 
                                         <li class="book-result__item d-block p-0"><span class=" text-muted"><%= @this_film.name %></span></li>                              
                                         <li class="book-result__item d-block p-0"><span class=" text-muted"><%= @screening.room.name%></span></li>
-                                        <li class="book-result__item d-block p-0"> <span class="text-muted "><%= @screening.start_film_at.strftime("%H:%M - %d/%m/%Y") %></span></li>
+                                        <li class="book-result__item d-block p-0"> <span class="text-muted screening-info" data-screening-id = "<%= @screening.id %>"><%= @screening.start_film_at.strftime("%H:%M - %d/%m/%Y") %></span></li>
                                     </div>
                                 </div>
                                 
@@ -125,7 +125,7 @@
                         </div>
                         
                         <div class="order">
-                            <a href="book-final.html" class="btn btn-md btn--warning btn--wide">purchase</a>
+                            <a href="#" class="btn btn-md btn--warning btn--wide btn-payment">Thanh toán</a>
                         </div>
             
                     </div>
@@ -141,9 +141,9 @@
 <div class="clearfix"></div>
 
 <div class="booking-pagination">
-        <a href="book2.html" class="booking-pagination__prev">
-            <p class="arrow__text arrow--prev">prev step</p>
-            <span class="arrow__info">choose a sit</span>
+        <a href="<%= film_screen_path %>" class="booking-pagination__prev">
+            <p class="arrow__text arrow--prev">Quay lại</p>
+            <span class="arrow__info">Chọn ghế ngồi</span>
         </a>
         <a href="#" class="booking-pagination__next hide--arrow">
             <p class="arrow__text arrow--next">next step</p>
@@ -152,3 +152,38 @@
 </div>
 
         
+<button type="button" class="btn btn-info btn-lg d-none open-modal" data-toggle="modal" data-target="#success_tic">Open Modal</button>
+
+<!-- Modal -->
+<div id="success_tic" class="modal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <a class="close" href="#" data-dismiss="modal">&times;</a>
+            <div class="page-body">
+                <div class="head">  
+                    <h3 style="margin-top:5px;" class = "modal-message">ahihi</h3>
+                    
+                </div>
+                <h1 style="text-align:center;">
+                    <div class="checkmark-circle book_success">
+                        <div class="background"></div>
+                        <div class="checkmark draw"></div>
+                    
+                    </div>
+                    <div class="popup error book_fail">
+                        <div class="message">
+                        
+                        </div>
+                        <h4>Vui lòng thử lại !</h4>
+                    </div>
+                </h1>
+            </div>
+        <a class="btn btn-outline" href="#"><h4>Quay lại trang chủ sau <span class="back_home_page">10</span>  giây !</h4></a>
+        
+    </div>
+    
+ </div>
+
+</div>

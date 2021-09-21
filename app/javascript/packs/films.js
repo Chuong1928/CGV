@@ -1,4 +1,4 @@
-
+console.log("loaded")
 var time = $('.choosen-time');
 $('input[name=day_show_film]').on('change',function(){
 
@@ -266,4 +266,55 @@ $(document).on('click', '.bootstrap-touchspin-up',function(){
     
     $(".total-payment .total-payment-cost").text(total+parseInt(ticket_payment)+" (VND)")
    
+})
+
+$(".btn-payment").on("click", function(e){
+    e.preventDefault()
+    console.log("thanh toán");
+    let seat_id = sessionStorage.getItem('list_seat_id')
+    let total_payment = $(".total-payment").find(".total-payment-cost").text().split(" ")[0];
+    let screening_id = $(".screening-info").attr("data-screening-id")
+    $.ajax({
+        url: `/order`,
+        data: {
+            order: {
+                seat_id: seat_id,
+                total_payment: total_payment,
+                screening_id : screening_id
+            },
+            authenticity_token: AUTH_TOKEN
+        },
+        type: 'POST',
+        dataType: 'json',
+        }).done(function (data) {
+            console.log(data)
+            $(".open-modal").trigger( "click" );
+            $(".modal-message").html(data.message)
+            if(data.success){
+                $(".book_fail").addClass("d-none")
+            }else{
+                $(".book_success").addClass("d-none")
+            }
+            
+            $(function(){
+                let spanCount = $("span.back_home_page");
+                console.log(spanCount);
+                let count = 9;
+                    countable= setInterval(function (){
+
+                        spanCount.text(count)
+
+                        if(count > 0){
+                            count -= 1;
+                        }else if(count <= 0){
+                                clearInterval(countable);
+                                window.location="/"
+                        }
+
+                }, 1000);
+            })
+        }).fail(function () {
+            console.log("Lỗi")
+        })
+
 })

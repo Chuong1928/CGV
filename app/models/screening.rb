@@ -1,7 +1,7 @@
 class Screening < ApplicationRecord
     belongs_to :film
     belongs_to :room
-    has_many   :seat_orders
+    has_many   :seat_orders,dependent: :destroy
     before_save :set_time_end_film
 
     def set_time_end_film

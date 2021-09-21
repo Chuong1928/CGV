@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root 'home#index'
+  
   resources :account
   resources :screen
+  resources :order
   resources :films do
-    resources :ticket_order 
     resources :screen do
       member do
         get :payment
