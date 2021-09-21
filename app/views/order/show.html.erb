@@ -1,1 +1,47 @@
-trang show order -> thanks_you
+<section class="container" style="background:#fff">
+            <div class="order-container">
+                <div class="order">
+                    <img class="order__images" alt='' src="https://png.pngtree.com/png-vector/20191024/ourlarge/pngtree-ticket-icon-outline-style-png-image_1852653.jpg">
+                    <p class="order__title">Cảm ơn! <br><span class="order__descript">Chúc bạn xem phim vui vẻ !</span></p>
+                </div>
+
+                <div class="ticket">
+                    <div class="ticket-position">
+                        <div class="ticket__indecator indecator--pre"><div class="indecator-text pre--text">online ticket</div> </div>
+                        <div class="ticket__inner">
+
+                            <div class="ticket-secondary">
+                                <span class="ticket__item" data-order-id = "<%= @order.id %>">Mã hóa đơn : <strong class="ticket__number"><%= @order.id %> </strong></span>
+                                <span class="ticket__item ticket__date"><%= @order.seat_orders.last.screening.start_film_at.strftime("%d/%m/%Y") %></span>
+                                <span class="ticket__item ticket__time"><%= @order.seat_orders.last.screening.start_film_at.strftime("%H:%M") %></span>
+                                <span class="ticket__item">Phòng chiếu: <span class="ticket__cinema"><%= @order.seat_orders.last.screening.room.name %></span></span>
+                                <span class="ticket__item">CGV: <span class="ticket__hall">Hà Nội</span></span>
+                                <span class="ticket__item ticket__price">Giá : <strong class="ticket__cost"><%= @order.seat_orders.last.seat.seat_type.price %>(vnđ)/Vé</strong></span>
+                            </div>
+
+                            <div class="ticket-primery">
+                                <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie"><%= @order.seat_orders.last.screening.film.name %></strong></span>
+                                <span class="ticket__item ticket__item--primery">SỐ ghế:
+                                    <span class="ticket__place">
+                                        <% @list_seat_of_order.each do |seat| %>
+                                            <%= seat %>
+                                        <% end %>
+                                    </span>
+                                </span>
+                            </div>
+
+
+                        </div>
+                        <div class="ticket__indecator indecator--post"><div class="indecator-text post--text">online ticket</div></div>
+                    </div>
+                </div>
+
+                <div class="ticket-control">
+                    <a href="#" class="watchlist list--download">Tải xuống</a>
+                    <a href="#" class="watchlist list--print sent_ticket_to_mail">Gửi về mail</a>
+                </div>
+
+            </div>
+        </section>
+        
+        <div class="clearfix"></div>

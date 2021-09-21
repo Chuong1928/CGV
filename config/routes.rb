@@ -3,9 +3,15 @@ Rails.application.routes.draw do
   root 'home#index'
   
   resources :account
+  
   resources :screen
-  resources :order
+  resources :order do
+    collection do
+      post :sent_you_ticket
+    end
+  end
   resources :films do
+    resources :ticket_order
     resources :screen do
       member do
         get :payment
