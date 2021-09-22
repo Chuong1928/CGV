@@ -27,14 +27,9 @@
                                 <p class="mb-0"><strong>Thời lượng: </strong><%= film.time %> Phút</p>
                                 <p><strong>Khởi chiếu: </strong><%= film.release_date.to_date.strftime("%d/%m/%Y") %> </p>
                                 <div>
-                                    <a href='<%= film_path(film) %>' class="float-left gallery-item__descript gallery-item--photo-link">
+                                    <a href='<%= film_path(film) %>' class=" gallery-item__descript gallery-item--photo-link">
                                         <span class="gallery-item__icon"><i class="fa fa-camera"></i></span>
-                                        <p class="gallery-item__name">Chi Tiết</p>
-                                    </a>
-                               
-                                    <a href='#' class="float-right gallery-item__descript gallery-item--photo-link">
-                                        <span class="gallery-item__icon"><i class="fas fa-ticket-alt"></i></span>
-                                        <p class="gallery-item__name">Mua Vé</p>
+                                        <p class="gallery-item__name">Đặt vé ngay !</p>
                                     </a>
                                 </div>
                             </div>

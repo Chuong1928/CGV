@@ -1,6 +1,7 @@
 class OrderController < ApplicationController
   layout "app"
     def show
+        @user = User.find(current_user.id)
         @order = Order.find(params[:id])
         @list_seat_of_order = []
         @order.seat_orders.each do |seat_order|
@@ -9,6 +10,7 @@ class OrderController < ApplicationController
     end
 
     def create
+        
         @order = Order.new
         @order.user_id = current_user.id
         @order.total_payment = params[:order][:total_payment]

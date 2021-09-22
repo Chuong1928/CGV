@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'home#index'
   
   resources :account
-  
+  resources :user
   resources :screen
   resources :order do
     collection do

@@ -6314,13 +6314,13 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 .choose-sits {
   text-align: center;
-  margin-top: 70px;
+  margin-top: 10px;
 }
 .choose-sits .choose-sits__info {
   display: inline-block;
   font-size: 13px;
   padding: 10px 20px 0 40px;
-  margin-bottom: 52px;
+  margin-bottom: 35px;
 }
 .choose-sits .choose-sits__info .sits-price {
   position: relative;
@@ -8424,6 +8424,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 .movie--test .movie-beta__link:hover:after {
   background-color: rgba(255, 255, 255, 0.4);
 }
+
 .movie--test .movie__info {
   overflow: hidden;
   padding: 17px 17px;
@@ -9828,8 +9829,6 @@ ul#navigation li.mega-menu__nav-item:hover:before {
     -moz-transform: scale(0.3);
     -ms-transform: scale(0.3);
     transform: scale(0.3);
-    margin-top: -250px;
-    margin-bottom: -280px;
   }
   .ticket {
     left: 50%;
@@ -10151,4 +10150,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 .error .action button:active {
   background-color: #c0392b;
+}
+.toast-success {
+  background-color: #51A351 !important;
 }

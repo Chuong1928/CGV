@@ -17,12 +17,9 @@
                                 </a>
                                 <a href='<%= film_path(film) %>' class="gallery-item__descript gallery-item--photo-link">
                                     <span class="gallery-item__icon"><i class="fa fa-camera"></i></span>
-                                    <p class="gallery-item__name">Xem Chi Tiết</p>
+                                    <p class="gallery-item__name">Đặt vé ngay !</p>
                                 </a>
-                                <a href='<%= film_ticket_order_index_path(film) %>' class="gallery-item__descript gallery-item--photo-link">
-                                    <span class="gallery-item__icon"><i class="fas fa-ticket-alt"></i></span>
-                                    <p class="gallery-item__name">Mua Vé</p>
-                                </a>
+                             
                             </div>
                       </div>
                 <% end %>
@@ -38,12 +35,9 @@
                                     </a>
                                     <a href='<%= film_path(film) %>' class="gallery-item__descript gallery-item--photo-link">
                                         <span class="gallery-item__icon"><i class="fa fa-camera"></i></span>
-                                        <p class="gallery-item__name">Xem Chi Tiết</p>
+                                        <p class="gallery-item__name">Đặt vé ngay !</p>
                                     </a>
-                                    <a href='<%= film_ticket_order_index_path(film) %>' class="gallery-item__descript gallery-item--photo-link">
-                                        <span class="gallery-item__icon"><i class="fas fa-ticket-alt"></i></span>
-                                        <p class="gallery-item__name">Mua Vé</p>
-                                    </a>
+                                   
                                 </div>
                             </div>
                     <% end %>
@@ -96,7 +90,8 @@
                                 <p class="movie__option"><strong>Giới hạn độ tuổi: </strong>PHIM CẤM KHÁN GIẢ DƯỚI <%= film.age_limit %> TUỔI</p>
 
                                 <div class="movie__btns">
-                                    <a href="#" class="watchlist">Add to watchlist</a>
+                                   
+                                    <a href="<%= film_path(film) %>" class="watchlist">Đặt vé ngay!</a>
                                 </div>
 
                         </div>
