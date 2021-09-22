@@ -1,6 +1,7 @@
 class OrderController < ApplicationController
   layout "app"
     def show
+        @user = User.find(current_user.id)
         @order = Order.find(params[:id])
         @list_seat_of_order = []
         @order.seat_orders.each do |seat_order|
@@ -9,6 +10,7 @@ class OrderController < ApplicationController
     end
 
     def create
+        
         @order = Order.new
         @order.user_id = current_user.id
         @order.total_payment = params[:order][:total_payment]
@@ -51,6 +53,20 @@ class OrderController < ApplicationController
                 }
                 format.json { render :json => { :success => @success, :message => @message }.to_json }
               end 
+    end
+
+    def sent_you_ticket
+      @ticket_id = params[:mail][:ticket_id]
+      
+      if SentTicketMailer.sent_you_ticket(current_user, @ticket_id ).deliver_now
+        respond_to do |format|
+          format.json { render :json => { :message => "Gửi mail thành công" }.to_json }
+        end
+      else
+        respond_to do |format|
+          format.json { render :json => { :message => "Gửi mail thất bại" }.to_json }
+        end
+      end
     end
 
     def sent_you_ticket

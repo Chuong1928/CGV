@@ -2,7 +2,7 @@
             <div class="col-sm-8 col-md-9">
                 <h2 class="page-heading p-0 text-uppercase font-weight-bold "><i class="fas fa-film mr-3"></i>Suất chiếu trong tuần</h2>
                     <div id="showtimes"><div class="showtimes">
-                        <div class="btn-group btn-block showtime-dates mb-3" id="dates" style="position: relative;display: inline-flex;vertical-align: middle;">
+                        <div class="btn-group btn-block showtime-dates mb-3 d-lg-inline-flex" id="dates" style="position: relative;vertical-align: middle;">
                                 <% 7.times do |day| %>
                                          <a class="btn btn-light text-muted date <%= ((Time.now.to_date+day).strftime("%d/%m") == (Time.now.to_date).strftime("%d/%m"))? "active" : "" %>" data-date="<%= (Time.now.to_date+day).strftime("%d/%m/%Y")%>">
                                             <%= (Time.now.to_date+day).strftime("%d/%m")%>

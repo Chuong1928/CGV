@@ -22,10 +22,17 @@
         </div>
         <div class="col-md-9"> 
             <div class="portlet light bordered">
-                <div class="portlet-title tabbable-line">
-                    <div class="caption caption-md">
+                <div class="portlet-title tabbable-line d-flex align-items-center ">
+                    <div class="caption caption-md w-25">
                         <i class="icon-globe theme-font hide"></i>
                         <span class="caption-subject font-blue-madison bold uppercase">CGV Account</span>
+                    </div>
+                    <div class="flex-lg-grow-1 text-center">
+                        <% flash.each do |type, msg| %>
+                            <div class="alert alert-info">
+                            <%= msg %>
+                            </div>
+                        <% end %>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -76,60 +83,114 @@
                             </div>
                             
                             <div role="tabpanel" class="tab-pane" id="nav-profile" aria-labelledby="nav-profile-tab">
-                                <form>
-                                <div class="form-group">
-                                    <label for="inputName">Name</label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="Name">
-                                </div>
-                                    <div class="form-group">
-                                    <label for="inputLastName">Last Name</label>
-                                    <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                    
-                                <button type="submit" class="btn btn-default">Submit</button>
-                                </form>
+
+                                          <%= form_for [@account], html: {class: "outer-repeater py-5", remote: true} do |f| %>
+                                            <div class="outer">
+                                                        <div class="outer">
+                                                            <div class="form-group row mb-4">
+                                                                <label for="taskname" class="col-form-label col-lg-2">Tên tài khoản</label>
+                                                                <div class="col-lg-10">
+                                                                    <%= f.text_field :name, placeholder: 'Tên danh mục ...' ,class: 'form-control disabled'  %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label for="taskname" class="col-form-label col-lg-2">Ngày tạo tài khoản</label>
+                                                                <div class="col-lg-10">
+                                                                    <%= f.text_field :created_at, placeholder: 'Ngày tạo tài khoản ...' ,class: 'form-control  bg-light',disabled: "disabled"  %>
+                                                                </div>
+                                                            </div>
+
+                                                        
+                                                            <div class="form-group row mb-4">
+                                                                <label for="taskname" class="col-form-label col-lg-2">Email</label>
+                                                                <div class="col-lg-10">
+                                                                    <%= f.text_field :email, placeholder: 'Email...' ,class: 'form-control bg-light ',disabled: "disabled"  %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label for="taskname" class="col-form-label col-lg-2">Chứng minh nhân dân</label>
+                                                                <div class="col-lg-10">
+                                                                    <%= f.text_field :identificate, placeholder: 'Số chứng minh/căn cước...' ,class: 'form-control' %>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row mb-4">
+                                                                <label for="taskname" class="col-form-label col-lg-2">Điện thoại</label>
+                                                                <div class="col-lg-10">
+                                                                    <%= f.text_field :phone, placeholder: 'Địa chỉ ...' ,class: 'form-control '  %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label for="taskname" class="col-form-label col-lg-2">Giới tính</label>
+                                                                <div class="col-lg-10">
+                                                                    <%= f.text_field :gender, placeholder: 'Giới tính ...' ,class: 'form-control '  %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label for="taskname" class="col-form-label col-lg-2">Ngày sinh</label>
+                                                                <div class="col-lg-10">
+                                                                    <%= f.date_field :birthday, :value => @user.birthday, placeholder: 'Ngày sinh ...' ,class: 'form-control' %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label for="taskname" class="col-form-label col-lg-2">Thành phố</label>
+                                                                <div class="col-lg-10">
+                                                                    <%= f.text_field :city, placeholder: 'Thành phố ...', class: 'form-control' %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label for="taskname" class="col-form-label col-lg-2">Địa chỉ</label>
+                                                                <div class="col-lg-10">
+                                                                    <%= f.text_field :address, placeholder: 'Địa chỉ...', class: 'form-control' %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                                <div class="col-lg-10">
+                                                                    <button type="submit" class="btn btn-primary new-post">Cập nhật</button>
+                                                                     <%= link_to "Hủy", account_path , class: "btn btn-secondary" %> 
+                                                                </div>
+                                                    </div>     
+                                        <% end %>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="nav-contact" aria-labelledby="nav-contact-tab">
-                                 <table class="table">
-                                        <thead >
-                                            <tr>
-                                                <th scope="col" style="width: 136px;">Tên phim</th>
-                                                <th scope="col">Ngày chiếu</th>
-                                                
-                                                <th scope="col">Đồ ăn thêm</th>
-                                                <th scope="col">Tổng thanh toán</th>
-                                                <th scope="col">Trạng thái</th>
-                                                <th scope="col">Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% @user.orders.each do |order| %>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                            <thead >
                                                 <tr>
-                                                    <td scope="row"><%= order.seat_orders.last.screening.film.name %></td>
-                                                    <td><%= order.seat_orders.last.screening.start_film_at.strftime("%d/%m/%Y") %></td>
-                                                
-                                                    <td><%= order.foodorders.count %></td>
-                                                    <td><%= order.total_payment %></td>
-                                                    <td><%= (check_film_sent(order.seat_orders.last.screening.start_film_at) == true) ? "Đã xem" : "Chưa xem"%></td>
-                                                    <td>
-                                                        <% if !check_film_sent(order.seat_orders.last.screening.start_film_at) %>
-                                                            <a type="button" class="btn btn-warning">Hủy đặt vé</a> 
-                                                            <a type="button" href="<%= order_path(order) %>" class="btn btn-success">Xem vé</a> 
-                                            
-                                                        <% end %>
-                                                    </td>
+                                                    <th scope="col" style="width: 136px;">Tên phim</th>
+                                                    <th scope="col">Ngày chiếu</th>
+                                                    
+                                                    <th scope="col">Đồ ăn </th>
+                                                    <th scope="col">Thanh toán</th>
+                                                    <th scope="col">Thời gian order</th>
+                                                    <th scope="col">Trạng thái</th>
+                                                    <th scope="col">Thao tác</th>
                                                 </tr>
-                                            <% end %>
-                                        </tbody>
-                                 </table>
+                                            </thead>
+                                            <tbody>
+                                                <% @user.orders.each do |order| %>
+                                                    <tr>
+                                                        <td scope="row"><%= order.seat_orders.last.screening.film.name %></td>
+                                                        <td><%= order.seat_orders.last.screening.start_film_at.strftime("%d/%m/%Y") %></td>
+                                                    
+                                                        <td><%= order.foodorders.count %></td>
+                                                        <td><%= order.total_payment %></td>
+                                                        <td><%= order.created_at.in_time_zone("Asia/Ho_Chi_Minh").strftime("%H:%M %d/%m/%Y") %></td>
+                                                        <td><%= (check_film_sent(order.seat_orders.last.screening.start_film_at) == true) ? "Đã xem" : "Chưa xem"%></td>
+                                                        <td>
+                                                            <% if !check_film_sent(order.seat_orders.last.screening.start_film_at) %>
+                                                                <a type="button" class="btn btn-warning">Hủy đặt vé</a> 
+                                                                <a type="button" href="<%= order_path(order) %>" class="btn btn-success">Xem vé</a> 
+                                                
+                                                            <% end %>
+                                                        </td>
+                                                    </tr>
+                                                <% end %>
+                                            </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     

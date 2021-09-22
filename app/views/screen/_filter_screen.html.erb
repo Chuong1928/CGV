@@ -1,22 +1,28 @@
+ <% if @screenings.presence != nil %>    
     <% Room.all.each do |room| %>
         <div class="time-select__group group--first">
             <div class="col-sm-4">
                 <p class="time-select__place"><%= room.name %></p>
             </div>
             <ul class="col-sm-8 items-wrap">
-                <% @screenings.each do |screening| %>
-                    <% if screening.room.id == room.id %>
-                        <li class="time-select__item" data-url="<%=film_screen_index_path(screening.film) %>" data-screen="<%= screening.id %>" data-time='<%= screening.start_film_at.strftime("%H:%M") %>'>
-                            <div>
-                                <%= screening.start_film_at.strftime("%H:%M") %> -
-                                <%= screening.start_film_at.strftime("%d/%m/%Y") %>
-                            </div>
-                            <p class="mb-0"><%= screening.film.name %></p>
-                        </li>
-                    
+                    <% @screenings.each do |screening| %>
+                        <% if screening.room.id == room.id %>
+                            <li class="time-select__item" data-url="<%=film_screen_index_path(screening.film) %>" data-screen="<%= screening.id %>" data-time='<%= screening.start_film_at.strftime("%H:%M") %>'>
+                                <div>
+                                    <%= screening.start_film_at.strftime("%H:%M") %> -
+                                    <%= screening.start_film_at.strftime("%d/%m/%Y") %>
+                                </div>
+                                <p class="mb-0"><%= screening.film.name %></p>
+                            </li>
+                        
+                        <% end %>
+                        
                     <% end %>
-                    
-                <% end %>
             </ul>
         </div>
     <% end %>
+  <% else %>
+    <div class="card-body">
+            Chưa có lịch chiếu cho ngày này. Hãy quay lại sau. Xin cám ơn.
+    </div>
+<% end %>

@@ -85,9 +85,6 @@ $('a.day_show_film').on('click',function(){
         let url= $(this).attr("data-url");
 
         $("a#next_step_pick_seat").attr("href", url+"/"+chooseTime)
-
-        $('.choose-indector--time').find('.choosen-area').text(chooseTime);
-
         //data element init
        // var chooseCinema = $(this).parent().parent().find('.time-select__place').text(); 
 
@@ -311,7 +308,7 @@ $(".btn-payment").on("click", function(e){
                             count -= 1;
                         }else if(count <= 0){
                                 clearInterval(countable);
-                                //window.location="/"
+                                window.location="/"
                         }
 
                 }, 1000);
@@ -321,26 +318,30 @@ $(".btn-payment").on("click", function(e){
         })
 
 })
-
-$(".sent_ticket_to_mail").on("click",function(e){
-    e.preventDefault()
-    let ticket_id = $(".ticket__item").attr("data-order-id")
-
-    console.log(ticket_id);
-    $.ajax({
-        url: `/order/sent_you_ticket`,
-        data: {
-            mail: {
-                ticket_id: ticket_id
+$(function(){
+    $(".sent_ticket_to_mail").on("click",function(e){
+        e.preventDefault()
+        let ticket_id = $(".ticket__item").attr("data-order-id")
+    
+        console.log(ticket_id);
+        $.ajax({
+            url: `/order/sent_you_ticket`,
+            data: {
+                mail: {
+                    ticket_id: ticket_id
+                },
+                authenticity_token: AUTH_TOKEN
             },
-            authenticity_token: AUTH_TOKEN
-        },
-        type: 'POST',
-        dataType: 'json',
-        }).done(function (data) {
-            console.log(data)
-        }).fail(function () {
-            console.log(data)
-        })
-
+            type: 'POST',
+            dataType: 'json',
+            }).done(function (data) {
+                console.log(data)
+                $(function(){
+                    toastr.success(data.message)
+                })
+            }).fail(function () {
+                console.log(data)
+            })
+    
+    })
 })
