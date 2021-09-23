@@ -3,7 +3,7 @@ class Screening < ApplicationRecord
     belongs_to :room
     has_many   :seat_orders,dependent: :destroy
     before_save :set_time_end_film
-
+    validates :film_id, :room_id, presence: true 
     def set_time_end_film
       start_film_at = self.start_film_at
       size_of_film = Film.find(self.film_id).time
