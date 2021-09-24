@@ -185,7 +185,7 @@ $(".add-food_to_order").on('click',function(e){
     e.preventDefault()
     let food_id = $(this).prev().attr("data-food-id")
     let price   = $(this).prev().attr("data-food-price")
-    $('.food-detail').append('<span class="text-muted d-block" data-food-price-pick = "'+price+'" data-food-pick = "'+food_id+'">'+$(this).prev().text()+' x<span class="food-quantity">1</span></span>');
+    $('.food-detail').append('<span class="text-muted d-block your-food" data-food-price-pick = "'+price+'" data-food-pick = "'+food_id+'">'+$(this).prev().text()+' x<span class="food-quantity">1</span></span>');
     $(".food-order").removeClass("d-none").addClass("d-flex")
     $(this).closest(".hahaha").find("input.form-control").val(1)
     let current_food_payment = parseInt($(".food-order").find(".pay-food").text())
@@ -273,11 +273,24 @@ $(".btn-payment").on("click", function(e){
     let seat_name = sessionStorage.getItem('list_seat_name')
     let total_payment = $(".total-payment").find(".total-payment-cost").text().split(" ")[0];
     let screening_id = $(".screening-info").attr("data-screening-id")
+    let list_food_id = []
+    if($("span.your-food").length != 0){
+        $("span.your-food").each(function(){
+            list_food_id.push({
+                id: $(this).attr("data-food-pick"),
+                quantity: $(this).find(".food-quantity").text().trim()
+            })
+         })
+    }
+    
+    console.log(list_food_id);
+   
     $.ajax({
         url: `/order`,
         data: {
             order: {
                 seat_id: seat_id,
+                list_food_id: list_food_id,
                 seat_name: seat_name,
                 total_payment: total_payment,
                 screening_id : screening_id

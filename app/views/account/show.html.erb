@@ -163,7 +163,7 @@
                                                     <th scope="col">Ngày chiếu</th>
                                                     
                                                     <th scope="col">Đồ ăn </th>
-                                                    <th scope="col">Thanh toán</th>
+                                                   
                                                     <th scope="col">Thời gian order</th>
                                                     <th scope="col">Trạng thái</th>
                                                     <th scope="col">Thao tác</th>
@@ -175,8 +175,14 @@
                                                         <td scope="row"><%= order.seat_orders.last.screening.film.name %></td>
                                                         <td><%= order.seat_orders.last.screening.start_film_at.strftime("%d/%m/%Y") %></td>
                                                     
-                                                        <td><%= order.foodorders.count %></td>
-                                                        <td><%= order.total_payment %></td>
+                                                        <td >
+                                                            
+                                                                <% order.foodorders.each do |foodorder| %>
+                                                                <p class="mb-0"><%= foodorder.food.name %>  x<%= foodorder.quantity %>  </p>
+                                                            <% end %>
+                                                           
+                                                        </td>
+                                                        
                                                         <td><%= order.created_at.in_time_zone("Asia/Ho_Chi_Minh").strftime("%H:%M %d/%m/%Y") %></td>
                                                         <td><%= (check_film_sent(order.seat_orders.last.screening.start_film_at) == true) ? "Đã xem" : "Chưa xem"%></td>
                                                         <td>
