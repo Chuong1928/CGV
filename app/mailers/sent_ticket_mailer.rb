@@ -3,6 +3,10 @@ class SentTicketMailer < ApplicationMailer
         @user = user
         @this_order = Order.find(order_id)
         @list_seat_of_order = []
+        @pay_food = 0;
+        @this_order.foodorders.each do |food_order|
+              @pay_food += (food_order.quantity * food_order.food.price)
+          end
         @this_order.seat_orders.each do |seat_order|
           @list_seat_of_order << seat_order.seat.id
         end
