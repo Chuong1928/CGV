@@ -41,58 +41,59 @@
                         <div class="ticket__indecator indecator--post"><div class="indecator-text post--text">online ticket</div></div>
                     </div>
                 </div>
-                <div class="ticket">
-                    <div class="ticket-position">
-                        <div class="ticket__indecator indecator--pre"><div class="indecator-text pre--text">online ticket</div> </div>
-                        <div class="ticket__inner">
+                <% if @order.foodorders.present? %>
+                    <div class="ticket">
+                        <div class="ticket-position">
+                            <div class="ticket__indecator indecator--pre"><div class="indecator-text pre--text">online ticket</div> </div>
+                            <div class="ticket__inner">
 
-                            <div class="ticket-secondary">
-                                <span class="ticket__item" data-order-id = "<%= @order.id %>">Mã hóa đơn : <strong class="ticket__number"><%= @order.id %> </strong></span>
-                                <span class="ticket__item ticket__date"><%= @order.seat_orders.last.screening.start_film_at.strftime("%d/%m/%Y") %></span>
-                                <span class="ticket__item ticket__time"><%= @order.seat_orders.last.screening.start_film_at.strftime("%H:%M") %></span>
-                                <span class="ticket__item">Phòng chiếu: <span class="ticket__cinema"><%= @order.seat_orders.last.screening.room.name %></span></span>
-                                <span class="ticket__item">CGV: <span class="ticket__hall">Hà Nội</span></span>
-                                <span class="ticket__item ticket__price">Thời gian  order : <strong class="ticket__cost"><%= @order.created_at.in_time_zone("Asia/Ho_Chi_Minh").strftime("%H:%M %d/%m/%Y") %></strong></span>
-                            </div>
+                                <div class="ticket-secondary">
+                                    <span class="ticket__item" data-order-id = "<%= @order.id %>">Mã hóa đơn : <strong class="ticket__number"><%= @order.id %> </strong></span>
+                                    <span class="ticket__item ticket__date"><%= @order.seat_orders.last.screening.start_film_at.strftime("%d/%m/%Y") %></span>
+                                    <span class="ticket__item ticket__time"><%= @order.seat_orders.last.screening.start_film_at.strftime("%H:%M") %></span>
+                                    <span class="ticket__item">Phòng chiếu: <span class="ticket__cinema"><%= @order.seat_orders.last.screening.room.name %></span></span>
+                                    <span class="ticket__item">CGV: <span class="ticket__hall">Hà Nội</span></span>
+                                    <span class="ticket__item ticket__price">Thời gian  order : <strong class="ticket__cost"><%= @order.created_at.in_time_zone("Asia/Ho_Chi_Minh").strftime("%H:%M %d/%m/%Y") %></strong></span>
+                                </div>
 
-                            <div class="ticket-primery mt-3" >
-                                <span class="ticket__item ticket__item--primery ticket__film m-0 p-0">ĐỒ ăn của bạn<br>
-                                    <strong class="ticket__movie">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th >Tên </th>
-                                                    <th >Số lượng</th>
-                                                    <th >Đơn giá (vnđ)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                             <% @order.foodorders.each do |foodorder| %>
-                                                <tr>
-                                                    <td class="p-1"><%= foodorder.food.name %></td>
-                                                    <td class="p-1"><%= foodorder.quantity %></td>
-                                                    <td class="p-1"><%= foodorder.food.price %></td>
-                                                </tr>
-                                               
-                                            <% end %>
-                                            </tbody>
-                                        </table>
-                                      
-                                    </strong>
-                                </span>
-                                <span class="ticket__item ticket__item--primery pt-3">Tổng:
-                                    <span class="ticket__place">
-                                        <%= @pay_food  %> (Đã thanh toán)
+                                <div class="ticket-primery mt-3" >
+                                    <span class="ticket__item ticket__item--primery ticket__film m-0 p-0">ĐỒ ăn của bạn<br>
+                                        <strong class="ticket__movie">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th >Tên </th>
+                                                        <th >Số lượng</th>
+                                                        <th >Đơn giá (vnđ)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% @order.foodorders.each do |foodorder| %>
+                                                    <tr>
+                                                        <td class="p-1"><%= foodorder.food.name %></td>
+                                                        <td class="p-1"><%= foodorder.quantity %></td>
+                                                        <td class="p-1"><%= foodorder.food.price %></td>
+                                                    </tr>
+                                                
+                                                <% end %>
+                                                </tbody>
+                                            </table>
+                                        
+                                        </strong>
                                     </span>
-                                </span>
+                                    <span class="ticket__item ticket__item--primery pt-3">Tổng:
+                                        <span class="ticket__place">
+                                            <%= @pay_food  %> (Đã thanh toán)
+                                        </span>
+                                    </span>
+                                </div>
+
+
                             </div>
-
-
+                            <div class="ticket__indecator indecator--post"><div class="indecator-text post--text">online ticket</div></div>
                         </div>
-                        <div class="ticket__indecator indecator--post"><div class="indecator-text post--text">online ticket</div></div>
                     </div>
-                </div>
-
+                <% end %>
                 <div class="ticket-control">
                     <a href="#" class="watchlist list--download">Tải xuống</a>
                     <a href="#" class="watchlist list--print sent_ticket_to_mail">Gửi về mail</a>
