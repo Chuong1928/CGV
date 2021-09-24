@@ -8,9 +8,9 @@ class AccountController < ApplicationController
     def show
         @user = current_user
         if params[:id].nil?
-            @account = User.find(current_user.id)
+            @account = User.find_by(id: current_user.id)
         else 
-            @account = User.find(params[:id])
+            @account = User.find_by(id: params[:id])
         end
     end
     
