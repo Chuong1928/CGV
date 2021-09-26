@@ -8,7 +8,7 @@ class UserController < ApplicationController
         end
     
     def update
-            @user = User.find(params[:id])
+            @user = User.friendly.find(params[:id])
             if @user.update(user_params)
                 flash[:notice] = "Cập nhật thành công"
                 redirect_to account_path

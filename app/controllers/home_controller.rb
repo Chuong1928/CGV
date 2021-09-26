@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
   def index
     @types = FilmType.all
-    @search = Film.search(params[:q])
+    @search = Film.friendly.search(params[:q])
     @films = @search.result
     respond_to do |format|
       format.html # index.html.erb

@@ -266,6 +266,8 @@ $(document).on('click', '.bootstrap-touchspin-up',function(){
 })
 
 $(".btn-payment").on("click", function(e){
+    let  current_user = $(".back_to_home_page").attr("data-user")
+    //console.log(current_user);
     $(this).attr("disabled", true);
     e.preventDefault()
     console.log("thanh toán");
@@ -321,7 +323,7 @@ $(".btn-payment").on("click", function(e){
                             count -= 1;
                         }else if(count <= 0){
                                 clearInterval(countable);
-                                window.location="/"
+                                window.location=`/account/${current_user}`
                         }
 
                 }, 1000);

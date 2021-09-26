@@ -1,4 +1,7 @@
 class Film < ApplicationRecord
+    extend FriendlyId
+    friendly_id :name, use: :slugged
+    
     belongs_to :film_type
     has_many   :screenings,dependent: :destroy
     validates :name, :time, presence: true 

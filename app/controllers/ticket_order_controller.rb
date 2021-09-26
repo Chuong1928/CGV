@@ -2,7 +2,7 @@ class TicketOrderController < ApplicationController
     before_action :authenticate_user!
     layout "app"
     def index
-        @this_film = Film.find(params[:film_id])
+        @this_film = Film.friendly.find(params[:film_id])
         data_filter = params[:search]
          if !data_filter.nil?
              @screenings = @this_film.screenings.where(day_show_film: params[:search][:date])
@@ -13,7 +13,7 @@ class TicketOrderController < ApplicationController
     end
 
     def show
-        @this_film = Film.find(params[:film_id])
+        @this_film = Film.friendly.find(params[:film_id])
         @screening = Screening.find(params[:id])
         
         respond_to do |format|
