@@ -1,7 +1,7 @@
 class FilmsController < ApplicationController
     layout "app"
     def index
-        @search = Film.search(params[:q])
+        @search = Film.friendly.search(params[:q])
         @films = @search.result
         respond_to do |format|
             format.html # index.html.erb
@@ -10,7 +10,7 @@ class FilmsController < ApplicationController
     end
     def show
         @films = Film.all
-        @film = Film.all.find(params[:id])
+        @film = Film.friendly.find(params[:id])
         data_filter = params[:search]
          if !data_filter.nil?
              @screenings = @film.screenings.where(day_show_film: params[:search][:date])

@@ -17,7 +17,7 @@ class ScreenController < ApplicationController
         end
     end
     def show
-        @this_film = Film.find(params[:film_id])
+        @this_film = Film.friendly.find(params[:film_id])
         @screening = Screening.find(params[:id])
         respond_to do |format|
             format.html # index.html.erb
@@ -25,7 +25,7 @@ class ScreenController < ApplicationController
         end
     end
     def payment
-        @this_film = Film.find(params[:film_id])
+        @this_film = Film.friendly.find(params[:film_id])
         @screening = Screening.find(params[:id])
         @foods = Food.all
     end

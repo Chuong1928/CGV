@@ -1,7 +1,7 @@
 class OrderController < ApplicationController
   layout "app"
     def show
-        @user = User.find(current_user.id)
+        @user = User.friendly.find(current_user.id)
         @order = Order.find(params[:id])
         @pay_food = 0;
         @order.foodorders.each do |food_order|

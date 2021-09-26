@@ -97,28 +97,28 @@
                             <div class="sits__row ">
                                 <% @screening.room.seats.where(seat_type_id: 2).each_with_index do |seat, index| %>
                                     <% if index <= 9 %>
-                                         <span class="sits__place sits-price--cheap <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='A<%= index+1%>' data-price='<%= seat.seat_type.price%>'>A<%= index+1%></span>
+                                         <span class="sits__place sits-price--cheap <%= ((@screening.check_seat_id_in_seat_order(seat.id)) && (@screening.check_status_of_screen_order(seat.id)))? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='A<%= index+1%>' data-price='<%= seat.seat_type.price%>'>A<%= index+1%></span>
                                     <% end %>
                                 <% end %>
                             </div>
                             <div class="sits__row">
                                 <% @screening.room.seats.where(seat_type_id: 2).each_with_index do |seat, index| %>
                                     <% if index >= 10 && index <=19 %>
-                                         <span class="sits__place sits-price--cheap <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='B<%= index+1%>' data-price='<%= seat.seat_type.price%>'>B<%= index+1%></span>
+                                         <span class="sits__place sits-price--cheap <%= ((@screening.check_seat_id_in_seat_order(seat.id)) && (@screening.check_status_of_screen_order(seat.id)))? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='B<%= index+1%>' data-price='<%= seat.seat_type.price%>'>B<%= index+1%></span>
                                     <% end %>
                                 <% end %>
                             </div>
                             <div class="sits__row">
                                 <% @screening.room.seats.where(seat_type_id: 2).each_with_index do |seat, index| %>
                                     <% if index >= 20 && index <=29 %>
-                                         <span class="sits__place sits-price--cheap <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='C<%= index+1%>' data-price='<%= seat.seat_type.price%>'>C<%= index+1%></span>
+                                         <span class="sits__place sits-price--cheap <%= ((@screening.check_seat_id_in_seat_order(seat.id)) && (@screening.check_status_of_screen_order(seat.id)))? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='C<%= index+1%>' data-price='<%= seat.seat_type.price%>'>C<%= index+1%></span>
                                     <% end %>
                                 <% end %>
                             </div>
                             <div class="sits__row">
                                 <% @screening.room.seats.where(seat_type_id: 2).each_with_index do |seat, index| %>
                                     <% if index >= 30 && index <=39 %>
-                                         <span class="sits__place sits-price--cheap <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='D<%= index+1%>' data-price='<%= seat.seat_type.price%>'>D<%= index+1%></span>
+                                         <span class="sits__place sits-price--cheap <%= ((@screening.check_seat_id_in_seat_order(seat.id)) && (@screening.check_status_of_screen_order(seat.id)))? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='D<%= index+1%>' data-price='<%= seat.seat_type.price%>'>D<%= index+1%></span>
                                     <% end %>
                                 <% end %>
                             </div>
@@ -128,14 +128,14 @@
                             <div class="sits__row additional-margin">
                                 <% @screening.room.seats.where(seat_type_id: 1).each_with_index do |seat, index| %>
                                     <% if index <= 9 %>
-                                         <span class="sits__place sits-price--middle <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='E<%= index+1%>' data-price='<%= seat.seat_type.price%>'>F<%= index+1%></span>
+                                         <span class="sits__place sits-price--middle <%= ((@screening.check_seat_id_in_seat_order(seat.id)) && (@screening.check_status_of_screen_order(seat.id)))? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='E<%= index+1%>' data-price='<%= seat.seat_type.price%>'>F<%= index+1%></span>
                                     <% end %>
                                 <% end %>
                             </div>
                             <div class="sits__row">
                                 <% @screening.room.seats.where(seat_type_id: 1).each_with_index do |seat, index| %>
                                     <% if index >= 10 && index <=19 %>
-                                         <span class="sits__place sits-price--middle <%= (@screening.seat_orders.pluck(:seat_id).include?(seat.id) == true)? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='E<%= index+1%>' data-price='<%= seat.seat_type.price%>'>F<%= index+1%></span>
+                                         <span class="sits__place sits-price--middle <%= ((@screening.check_seat_id_in_seat_order(seat.id)) && (@screening.check_status_of_screen_order(seat.id)))? "sits-state--not": "" %>" data-seat-id ="<%= seat.id%>" data-place='E<%= index+1%>' data-price='<%= seat.seat_type.price%>'>F<%= index+1%></span>
                                     <% end %>
                                 <% end %>
                             </div>
