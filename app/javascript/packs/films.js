@@ -360,3 +360,50 @@ $(function(){
     
     })
 })
+
+$(".cancel-order").on("click", function(e){
+    e.preventDefault()
+    console.log("Hủy đặt vé");
+    let self = $(this)
+    let order_id = $(this).attr("data-order-id-del")
+    console.log(order_id);
+    $.ajax({
+        url: `/order/cancel_order`,
+        data: {
+            order: {
+                order_id: order_id
+            },
+            authenticity_token: AUTH_TOKEN
+        },
+        type: 'POST',
+        dataType: 'json',
+        }).done(function (data) {
+            console.log(data)
+            
+            self.closest(".order-detail").find("td").css("text-decoration", "line-through")
+            self.text("Bạn đã hủy đơn hàng này").removeClass("cancel-order btn-warning").attr("disabled", true).addClass("disabled btn-secondary");
+            self.closest(".action-order").find(".ticket_detail_view").remove()
+            $(function(){
+                toastr.success(data.message)
+            })
+        }).fail(function () {
+            console.log(data)
+        })
+    //console.log(film_cancel.text());
+})
+// display animate load 
+function displayAnimateLoad(action){
+    
+    if(action == 'hide'){
+     return   $(".wraper-animate").addClass("d-none")
+    }
+    $(".wraper-animate").removeClass("d-none")
+}
+// before ajax send
+$( document ).ajaxSend(function() {
+    displayAnimateLoad()
+});
+//  ajax send Complete
+$( document ).ajaxComplete(function() {
+    displayAnimateLoad('hide')
+  });

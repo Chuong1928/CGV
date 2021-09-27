@@ -5390,7 +5390,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 .time-select .time-select__item:before {
   content: '';
-  width: 123px;
+  width: 96%;
   height: 28px;
   border: 1px solid #ffffff;
   position: absolute;

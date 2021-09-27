@@ -171,28 +171,46 @@
                                             </thead>
                                             <tbody>
                                                 <% @user.orders.each do |order| %>
-                                                    <tr>
-                                                        <td scope="row"><%= order.seat_orders.last.screening.film.name %></td>
-                                                        <td><%= order.seat_orders.last.screening.start_film_at.strftime("%d/%m/%Y") %></td>
+                                                     <% if order.seat_orders.present? %>
                                                     
-                                                        <td >
-                                                            
-                                                                <% order.foodorders.each do |foodorder| %>
-                                                                <p class="mb-0"><%= foodorder.food.name %>  x<%= foodorder.quantity %>  </p>
-                                                            <% end %>
-                                                           
-                                                        </td>
+                                                        <tr class="order-detail">
+                                                            <td scope="row"><%= order.seat_orders.last.screening.film.name %></td>
+                                                            <td ><%= order.seat_orders.last.screening.start_film_at.strftime("%d/%m/%Y") %></td>
                                                         
-                                                        <td><%= order.created_at.in_time_zone("Asia/Ho_Chi_Minh").strftime("%H:%M %d/%m/%Y") %></td>
-                                                        <td><%= (check_film_sent(order.seat_orders.last.screening.start_film_at) == true) ? "Đã xem" : "Chưa xem"%></td>
-                                                        <td>
-                                                            <% if !check_film_sent(order.seat_orders.last.screening.start_film_at) %>
-                                                                <a type="button" class="btn btn-warning">Hủy đặt vé</a> 
-                                                                <a type="button" href="<%= order_path(order) %>" class="btn btn-success">Xem vé</a> 
-                                                
-                                                            <% end %>
-                                                        </td>
-                                                    </tr>
+                                                            <td >
+                                                                
+                                                                    <% order.foodorders.each do |foodorder| %>
+                                                                    <p class="mb-0"><%= foodorder.food.name %>  x<%= foodorder.quantity %>  </p>
+                                                                <% end %>
+                                                            
+                                                            </td>
+                                                            
+                                                            <td ><%= order.created_at.in_time_zone("Asia/Ho_Chi_Minh").strftime("%H:%M %d/%m/%Y") %></td>
+                                                            <td><%= (check_film_sent(order.seat_orders.last.screening.start_film_at) == true) ? "Đã xem" : "Chưa xem"%></td>
+                                                            <td class="action-order">                                                       
+                                                                <% if !check_film_sent(order.seat_orders.last.screening.start_film_at) %>
+                                                                    <a type="button" data-order-id-del = "<%= order.id %>" class="btn btn-warning cancel-order">Hủy đặt vé</a> 
+                                                                    <a type="button" href="<%= order_path(order) %>" class="btn btn-success ticket_detail_view">Xem vé</a> 
+                                                                <% end %>
+                                                            </td>
+                                                        </tr>
+                                                        <del>
+                                                      <% else %>
+                                                      <tr>
+                                                            <td scope="row" class="order_name-deleted"></td>
+                                                            <td class="order_start_film_at-deleted"></td>
+                                                        
+                                                            <td > 
+                                                            </td>
+                                                            
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>                                                       
+                                                                <a type="button" class="btn btn-secondary disabled">Bạn đã hủy đơn hàng này</a>
+                                                            </td>
+                                                          
+                                                      </tr>
+                                                        <% end %>
                                                 <% end %>
                                             </tbody>
                                     </table>

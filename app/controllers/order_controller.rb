@@ -90,6 +90,21 @@ class OrderController < ApplicationController
           format.json { render :json => { :message => "Gửi mail thất bại" }.to_json }
         end
       end
+    end 
+
+    def cancel_order
+      @order_id = params[:order][:order_id]
+      
+      if current_user.orders.find(@order_id).seat_orders.destroy_all && current_user.orders.find(@order_id).update(status: false)
+
+        respond_to do |format|
+          format.json { render :json => { :message => "Hủy đặt vé thành công" }.to_json }
+        end
+      else
+        respond_to do |format|
+          format.json { render :json => { :message => "Hủy đặt vé thất bại" }.to_json }
+        end
+      end
     end  
     
    private
