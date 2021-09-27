@@ -6,7 +6,7 @@
         <ul class="col-sm-8 items-wrap">
             <% @screenings.each do |screening| %>
                 <% if screening.room.id == room.id %>
-                    <li class="time-select__item" data-time='<%= screening.start_film_at.strftime("%H:%M") %>' data-screen="<%= screening.id %>">
+                    <li class="time-select__item " data-time='<%= screening.start_film_at.strftime("%H:%M") %>' data-screen="<%= screening.id %>">
                         <%= screening.start_film_at.strftime("%H:%M") %> -
                         <%= screening.start_film_at.strftime("%d/%m/%Y") %>
                     </li>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :order do
     collection do
       post :sent_you_ticket
+      post :cancel_order
     end
   end
   resources :films do
