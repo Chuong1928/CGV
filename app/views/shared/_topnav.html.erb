@@ -3,7 +3,7 @@
             <div class="container container--add">
                 <%= search_form_for @search, class: "search" do |f| %>
                     <div class="form-group d-flex">
-                        <%= f.text_field :age_limit_gteq, class: "search__field w-50 d-none d-lg-block", placeholder: "Độ tuổi >="  %>
+                        <%= f.text_field :age_limit_lteq, class: "search__field w-50 d-none d-lg-block", placeholder: "Độ tuổi >="  %>
                         <div class="w-100">
                             <%= f.text_field :key_cont, class: "search__field", placeholder: "Search" %><br>
                             <select name="Scope" id="search-sort" class="search__sort" tabindex="0">

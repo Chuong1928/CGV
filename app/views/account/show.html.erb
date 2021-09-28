@@ -170,7 +170,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% @user.orders.each do |order| %>
+                                                <% @user.orders.includes(:seat_orders, :foodorders).each do |order| %>
                                                      <% if order.seat_orders.present? %>
                                                     
                                                         <tr class="order-detail">
