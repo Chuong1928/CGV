@@ -20,10 +20,13 @@ $('input[name=day_show_film]').on('change',function(){
             })
 });
 
-$('a.date').on('click',function(){
+$(document).on('click',"a.date",function(){
     // code
+    if($(".this_film").length != 0){
+        $(".this_film").addClass("d-none");
+    }
+
     let date = $(this).attr("data-date")
-    
     // xoa class active truoc do
     $(".active").removeClass("active")
     //addclass active cho ngay duoc chon
@@ -93,6 +96,20 @@ $('a.day_show_film').on('click',function(){
          console.log(time.val())
         // cinema.val(chooseCinema);
     });  
+   
+    $(document).on("click", ".time-select__item",function(){
+      
+        if($(this).hasClass("active")){
+            console.log($(this).attr("data-url"));
+            $(".this_film").removeClass("d-none");
+            var chooseTime = $(this).attr('data-screen');
+            let url= $(this).attr("data-url");
+            $("a.book_now").attr("href", url+"/"+chooseTime)
+            $(".ticked_film_name").text("Tên phim  : "+ $(this).find(".this-film_name").text())
+            $(".ticked_film_time").text("Thời gian : "+ $(this).find(".this-film_time").text())
+        }
+      
+    })
     //3. Choose sits (and count price for them)
     //users choose sits
 
