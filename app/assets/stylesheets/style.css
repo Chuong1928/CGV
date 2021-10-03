@@ -5397,28 +5397,12 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   top: 3px;
   left: 3px;
 }
-.time-select .time-select__item:after {
-  content: '';
-  width: 64px;
-  height: 34px;
-  /* background-image: url(../images/components/bg-time.png); */
-  background-repeat: no-repeat;
-  -webkit-background-size: 64px 34px;
-  background-size: 64px 34px;
-  position: absolute;
-  top: 0px;
-  left: -2px;
-  z-index: -1;
-}
-.time-select .time-select__item:hover:after {
-  /* background-image: url(../images/components/bg-time-hover.png); */
-}
+
+
 .time-select .time-select__item.active {
   background-color: #fe505a;
 }
-.time-select .time-select__item.active:after {
-  /* background-image: url(../images/components/bg-time-hover.png); */
-}
+
 .time-select .items-wrap {
   padding-top: 15px;
   margin-bottom: 5px;

@@ -1953,3 +1953,88 @@
 .portlet.box.grey-cararra>.portlet-title>.actions .btn-default>i {
     color: #fff
 }
+// dialog info user
+.dialog-screen-info  {
+    position: absolute;
+    background-color: blue;
+    // test
+    top: 200px;
+    left: 200px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    min-width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    text-align: center;
+    display: none;
+    z-index: 999;
+
+    &.active {
+        display: block;
+    }
+    &::before {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        position: absolute;
+        left: 30px;
+    }
+
+    &.on-top {
+        transform: translateY(calc(-100% - 10px));
+        &:before {
+            bottom: -20px;
+            border-top-color: white;
+        }
+    }
+    &.on-bottom {
+        &:before {
+            top: -20px;
+            border-bottom-color: white;
+        }
+    }
+    i {
+        font-size: 25px;
+    }
+}
+
+.show-screen-item {
+    position: relative;
+    &:after, &:before {
+        content: '';
+        display: block;
+        height: 10px;
+        background-color: transparent;
+        width: 100%;
+        left: 0;
+        position: absolute;
+    }
+    &:after {
+        bottom: -10px;
+    }
+    &:before {
+        top: -10px;
+    }
+}
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

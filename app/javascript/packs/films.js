@@ -424,3 +424,4 @@ $( document ).ajaxSend(function() {
 $( document ).ajaxComplete(function() {
     displayAnimateLoad('hide')
   });
+
