@@ -1,21 +1,26 @@
-<h1 class="mt-0">Quên mật khẩu ?</h1>
     <div class="we-login-register"> 
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+       
+     
+    </div>
+  <div class="p-2">
+      <div class="alert alert-success text-center mb-4" role="alert">
+          Enter your Email and instructions will be sent to you!
+      </div>
+       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "form-horizontal" }) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
-          <div class="f-email ">
+          <div class="f-email form-group">
                   <label for="email" class="label-group">Email của bạn</label> 
-                  <p class="reset-magin">Liên kết khôi phục lại mật khẩu sẽ được gửi đến Email của bạn !</p>
-                  <%= f.text_field :email, autofocus: true, autocomplete: "email" , placeholder: 'Your email' %>
+                  <%= f.text_field :email, autofocus: true, autocomplete: "email" , placeholder: 'Your email', class: "form-control" %>
                   <p class="reset-magin error-mes">.</p>
                   
             </div>
 
-          <div class="actions">
-                <button type="submit" class="btn-submit" data-ripple="">Submit</button>
+          <div class="actions mt-4">
+            <button type="submit" class="btn btn-primary btn-block waves-effect waves-light" data-ripple="">Đăng Ký</button>
           </div>
         <% end %>
-      <div class="mt-4 text-center">
+       <div class="mt-4 text-center">
            <a href="<%= new_session_path(resource_name)	 %>" class="text-muted"><i class="fas fa-sign-in-alt mr-1"></i> Đăng nhập ngay !</a>
       </div>
-    </div>
+  </div>
 

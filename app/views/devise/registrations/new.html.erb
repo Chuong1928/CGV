@@ -1,57 +1,34 @@
  <div class="we-login-register">
     <h1 class="mt-0">Đăng ký tài khoản</h1>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "register-form-1"}) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:id => "register-form-1", :class => "form-horizontal"}) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="f-accname">
+        <div class="f-accname form-group">
               <label for="accname" class="label-group">Họ Và Tên</label> 
-                <%= f.text_field :name, autofocus: true, autocomplete: "UserName" , placeholder: 'Họ và tên' %> 
-                <p class="reset-magin error-mes">.</p>
+                  <%= f.text_field :name, autofocus: true, autocomplete: "UserName" , placeholder: 'Họ và tên', class: "form-control" %> 
+                  <p class="reset-magin error-mes">.</p>
         </div>
-        <div class="f-email ">
+        <div class="f-email form-group">
               <label for="email" class="label-group">Địa chỉ email</label> 
-              <p class="reset-magin">Bạn sẽ dùng Email này để đăng nhập vào CGV</p>
-              <%= f.text_field :email, autofocus: true, autocomplete: "email" , placeholder: 'Email' %>
+              <%= f.text_field :email, autofocus: true, autocomplete: "email" , placeholder: 'Email', class: "form-control" %>
               <p class="reset-magin error-mes">.</p>
         </div> 
-        <div class="f-email ">
-              <div class="d-flex">
-                     <div>
-                          <label for="birthday" class="label-group">Ngày sinh</label> 
-                          <%= f.date_field :birthday, autofocus: true, autocomplete: "email" , as: :date, value: f.object.try(:strftime,"%m/%d/%Y") %>
-                      </div>
-                      <div>
-                           <label for="birthday" class="label-group">Giới tính</label> 
-                           <div>
-                                 <div>
-                                        <%= f.radio_button :gender, 'Nam', :checked => true %> 
-                                       <label class="px-2">Nam</label>
-                                 </div>
-                                 <div>
-                                      <%= f.radio_button :gender, 'Nữ' %>
-                                      <label class="px-2">Nữ</label>
-                                  </div>
-                           </div>
-                      </div>
-              </div>
-              
-        </div> 
-        <div class="f-pass">
+
+        <div class="f-pass form-group">
               <label for="password" class="label-group">Mật khẩu <% if @minimum_password_length %>
                 <em>(<%= @minimum_password_length %> kí tự tối thiểu.)</em>
                 <% end %><br /></label> 
                
-              <%= f.password_field :password, autocomplete: "current-password", placeholder: 'Mật khẩu' %> 
-              <p class="reset-magin error-mes">.</p><br>    
+              <%= f.password_field :password, autocomplete: "current-password", placeholder: 'Mật khẩu', class: "form-control" %> 
+              <p class="reset-magin error-mes">.</p>   
         </div>
-        <div class="f-cfpass">
+        <div class="f-cfpass form-group">
                   <label for="cfpassword" class="label-group">Xác nhận mật khẩu</label> 
-                  <%= f.password_field :password_confirmation, autocomplete: "current-password", placeholder: 'Xác nhận mật khẩu' %> 
+                  <%= f.password_field :password_confirmation, autocomplete: "current-password", placeholder: 'Xác nhận mật khẩu', class: "form-control" %> 
                   <p class="reset-magin error-mes">.</p>
-                  <br>
         </div>
-        <div class="actions">
-          <button type="submit" class="btn-submit" data-ripple="">Đăng Ký</button>
+        <div class="actions mt-4">
+          <button type="submit" class="btn btn-primary btn-block waves-effect waves-light" data-ripple="">Đăng Ký</button>
         </div>
     <% end %>
 
