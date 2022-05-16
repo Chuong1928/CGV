@@ -1,1 +1,1 @@
-console.log("custom js file loaded 123")
+console.log("custom js file loaded truong dep trai")
