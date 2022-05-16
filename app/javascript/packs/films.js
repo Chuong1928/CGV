@@ -1,4 +1,4 @@
-console.log("loaded")
+console.log("loaded123")
 var time = $('.choosen-time');
 $('input[name=day_show_film]').on('change',function(){
 

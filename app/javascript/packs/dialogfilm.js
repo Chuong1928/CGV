@@ -1,4 +1,4 @@
-console.log("dialog film");
+console.log("dialog film 123");
 class DialogScreen {
     // hàm tạo -> truyền vào 1 selecter[class hoặc id]
     constructor(selector = ".time-select__item"){
