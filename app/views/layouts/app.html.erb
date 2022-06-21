@@ -48,6 +48,29 @@
         <!--toastr -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <%= javascript_pack_tag 'films', 'data-turbolinks-track': 'reload' %>
-        <%= javascript_pack_tag 'app', 'data-turbolinks-track': 'reload' %>
+        <script type="text/javascript">
+                 function init_Trailer () {
+
+                                $('.trailer-sample').magnificPopup({
+                                    disableOn: 700,
+                                    type: 'iframe',
+                                    mainClass: 'mfp-fade',
+                                    removalDelay: 160,
+                                    preloader: false,
+                                    autoplay:true,
+                                    fixedContentPos: false
+                                });
+                }
+		</script>
+		<script type="text/javascript">
+            $(document).ready(function() {
+                if($(".trailer-sample").length != 0){
+                    init_Trailer();
+                }
+            });
+		</script>
+       <script>
+            $("input[name='demo3']").TouchSpin();
+        </script>
 </body>
 </html>  

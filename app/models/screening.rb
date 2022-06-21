@@ -17,18 +17,4 @@ class Screening < ApplicationRecord
     def check_seat_id_in_seat_order(seat_id)
       self.seat_orders.pluck(:seat_id).include?(seat_id)
     end
-    def film_name
-      self.film.name
-    end
-    def room_name
-      self.room.name
-    end
-
-    def seat_slot
-      room_size = room.size
-      room_size - self.seat_orders.count
-    end
-    def format_start_film_at
-      self.start_film_at.strftime("%H:%M - %d/%m/%Y")
-    end
 end

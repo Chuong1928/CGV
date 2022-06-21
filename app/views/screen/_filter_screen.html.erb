@@ -7,7 +7,7 @@
             <ul class="col-sm-8 items-wrap">
                     <% @screenings.each do |screening| %>
                         <% if screening.room.id == room.id %>
-                            <li class="time-select__item show-screen-item" data-url="<%=film_screen_index_path(screening.film) %>" data-screen="<%= screening.id %>" data-time='<%= screening.start_film_at.strftime("%H:%M") %>'>
+                            <li class="time-select__item" data-url="<%=film_screen_index_path(screening.film) %>" data-screen="<%= screening.id %>" data-time='<%= screening.start_film_at.strftime("%H:%M") %>'>
                                 <div class="text-center this-film_time">
                                     <%= screening.start_film_at.strftime("%H:%M") %> -
                                     <%= screening.start_film_at.strftime("%d/%m/%Y") %>
